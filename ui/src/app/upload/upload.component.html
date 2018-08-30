@@ -1,3 +1,88 @@
+
+<h3>Upload some images:</h3>
+
+<div ng2FileDrop
+      [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="drop-zone">
+  Drop files to queue for upload.
+</div>
 <p>
-  upload works!
+  Or choose files:
 </p>
+<div class="selector">
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple  />
+</div>
+
+
+<div class="col-md-9" style="margin-bottom: 40px">
+ 
+  <h3>Upload queue:</h3>
+  <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+    <table class="upload-queue-table">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Progress</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+            <td>{{ item?.file?.name }}</td>
+            <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            <td>
+                <div class="progress" style="margin-bottom: 0;">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                </div>
+            </td>
+            <td class="text-center">
+                <span *ngIf="item.isSuccess"><i class="material-icons">check_circle</i> </span>
+                <span *ngIf="item.isCancel"><i class="material-icons">cancel</i></span>
+                <span *ngIf="item.isError"><i class="material-icons">error</i> </span>
+            </td>
+            <td nowrap>
+                <button type="button" class="btn btn-success btn-xs"
+                        (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                        <i class="material-icons">cloud_upload</i>
+                </button>
+                <button type="button" class="btn btn-warning btn-xs"
+                        (click)="item.cancel()" [disabled]="!item.isUploading">
+                        <i class="material-icons">cancel</i>
+                </button>
+                <button type="button" class="btn btn-danger btn-xs"
+                        (click)="item.remove()">
+                        <i class="material-icons">delete</i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="queue-progress">
+        Queue progress:
+        <div class="progress" style="">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+        </div>
+    </div>
+
+    <div class="queue-actions">
+      <button mat-button type="button" class="btn btn-success btn-s"
+              (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+          <i class="material-icons">cloud_upload</i>  Upload all
+      </button>
+      <button mat-button type="button" class="btn btn-warning btn-s"
+              (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+            <i class="material-icons">cancel</i>  Cancel all
+      </button>
+      <button mat-button type="button" class="btn btn-danger btn-s"
+              (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+          <i class="material-icons">delete</i> Remove all
+      </button>
+  </div>
+</div>
+
