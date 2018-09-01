@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="" [class.activated]="currentUrl == '/'">
+        <i class="material-icons">home</i>
+      </a>
+      <a routerLink="search" [class.activated]="currentUrl == '/search'">
+        <i class="material-icons">search</i>
+      </a>
+      <a routerLink="upload" [class.activated]="currentUrl == '/upload'">
+        <i class="material-icons">cloud_upload</i>
+      </a>
+      <a routerLink="folder" [class.activated]="currentUrl == '/folder'">
+        <i class="material-icons">folder</i>
+      </a>
+      <a routerLink="cart" [class.activated]="currentUrl == '/cart'">
+        <i class="material-icons">shopping_cart</i>
+      </a>
+    </li>
+  </ul>
+</nav>>

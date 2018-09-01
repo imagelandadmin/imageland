@@ -1,0 +1,36 @@
+.drop-zone { 
+    border: dotted 3px lightgray;
+    height: 100px;
+    text-align: center;
+    padding-top: 20px; 
+}
+
+.nv-file-over { 
+    border: dotted 3px red; 
+}
+
+.upload-queue-table {
+    width: 100%;
+    text-align: left;
+}
+
+.queue-progress, .queue-actions {
+    padding-top: 20px;
+}
+
+/*
+.btn {
+    color: white;
+}
+
+.btn-success {
+    background-color: green;
+}
+
+.btn-warning {
+    background-color: orange;
+}
+
+.btn-danger {
+    background-color: red;
+}*/
