@@ -17,6 +17,9 @@ service: lambda # NOTE: update this with your service name
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+plugins:
+  - serverless-sam
+
 provider:
   name: aws
   runtime: java8
@@ -47,11 +50,15 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: build/libs/hello-dev-all.jar
+  artifact: build/libs/lambda-dev-all.jar
 
 functions:
   hello:
-    handler: com.serverless.Handler
+    handler: us.imageland.Handler
+    events:
+      - http:
+          path: hello
+          method: get
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
