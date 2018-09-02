@@ -7,7 +7,14 @@ const awsmobile =  {
     "aws_user_pools_id": "us-east-1_9TMby07x2",
     "aws_user_pools_web_client_id": "1jb2i9a8uj62qtle8m88ktdcji",
     "aws_user_files_s3_bucket": "images-imageland-us",
-    "aws_user_files_s3_bucket_region": "us-east-1"
+    "aws_user_files_s3_bucket_region": "us-east-1",
+    "aws_dynamodb_all_tables_region": "us-east-1",
+    "aws_dynamodb_table_schemas": [
+        {
+            "tableName": "Documents",
+            "region": "us-east-1"
+        }
+    ]
 };
 
 

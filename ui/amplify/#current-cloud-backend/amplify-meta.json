@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
 				"logicalId": "authcognito02d6ec4a"
 			},
-			"lastPushTimeStamp": "2018-09-02T22:50:28.186Z",
+			"lastPushTimeStamp": "2018-09-02T22:59:25.201Z",
 			"output": {
 				"AppClientSecret": "bksf62kv477j3hqjofa53u4lm1go3p2cg0a7mhce6mvupkf2v2g",
 				"UserPoolId": "us-east-1_9TMby07x2",
@@ -40,12 +40,29 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"logicalId": "storages3images"
 			},
-			"lastPushTimeStamp": "2018-09-02T22:50:28.189Z",
+			"lastPushTimeStamp": "2018-09-02T22:59:25.202Z",
 			"output": {
 				"BucketName": "images-imageland-us",
 				"Region": "us-east-1"
 			},
 			"lastPushDirHash": "80PNeoeHMsw+9y3yLeE/vuHAQhE="
+		},
+		"dynamo8d6032b4": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/dynamo8d6032b4-cloudformation-template.json",
+				"logicalId": "storagedynamo8d6032b4"
+			},
+			"lastPushTimeStamp": "2018-09-02T22:59:25.205Z",
+			"output": {
+				"PartitionKeyName": "id",
+				"Region": "us-east-1",
+				"Arn": "arn:aws:dynamodb:us-east-1:965717234829:table/Documents",
+				"PartitionKeyType": "S",
+				"Name": "Documents"
+			},
+			"lastPushDirHash": "xCL0kmfpai7B9yuQD0dYhwj9Wtc="
 		}
 	}
 }
