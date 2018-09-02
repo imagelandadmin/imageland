@@ -144,15 +144,11 @@
 				}
 			}
 		},
-		"storagedynamo8d6032b4": {
+		"hostingS3AndCloudFront": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/dynamo8d6032b4-cloudformation-template.json",
-				"Parameters": {
-					"tableName": "Documents",
-					"partitionKeyName": "id",
-					"partitionKeyType": "S"
-				}
+				"TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
+				"Parameters": {}
 			}
 		}
 	},

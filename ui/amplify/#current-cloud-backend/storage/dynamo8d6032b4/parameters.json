@@ -1,5 +1,0 @@
-{
-    "tableName": "Documents",
-    "partitionKeyName": "id",
-    "partitionKeyType": "S"
-}
