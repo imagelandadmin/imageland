@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { ApolloBoostModule, ApolloBoost } from "apollo-angular-boost";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { SearchComponent } from './search/search.component';
 import { FolderComponent } from './folder/folder.component';
 import { UploadComponent } from './upload/upload.component';
 import { CartComponent } from './cart/cart.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,13 @@ import { CartComponent } from './cart/cart.component';
     HttpClientModule,
     FileUploadModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    GraphQLModule,
+    ApolloBoostModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}

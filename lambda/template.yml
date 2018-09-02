@@ -25,6 +25,13 @@ Resources:
             Method: get
             RestApiId:
               Ref: Lambda
+        Event3:
+          Type: Api
+          Properties:
+            Path: /graphql
+            Method: options
+            RestApiId:
+              Ref: Lambda
   Lambda:
     Type: 'AWS::Serverless::Api'
     Properties:
@@ -36,29 +43,6 @@ Resources:
             Ref: 'AWS::StackName'
         paths:
           /graphql:
-            options:
-              x-amazon-apigateway-integration:
-                type: mock
-                requestTemplates:
-                  application/json: '{ "statusCode" : 200 }'
-                responses:
-                  default:
-                    statusCode: 200
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-                      method.response.header.Access-Control-Allow-Methods: '''options,post,get'''
-                      method.response.header.Access-Control-Allow-Origin: '''*'''
-                    responseTemplates:
-                      application/json: '{}'
-              responses:
-                '200':
-                  headers:
-                    Access-Control-Allow-Headers:
-                      type: string
-                    Access-Control-Allow-Methods:
-                      type: string
-                    Access-Control-Allow-Origin:
-                      type: string
             post:
               x-amazon-apigateway-integration:
                 httpMethod: POST
@@ -66,24 +50,7 @@ Resources:
                 uri:
                   'Fn::Sub': >-
                     arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Graphql.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: 200
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-                      method.response.header.Access-Control-Allow-Methods: '''post'''
-                      method.response.header.Access-Control-Allow-Origin: '''*'''
-                    responseTemplates:
-                      application/json: '{}'
-              responses:
-                '200':
-                  headers:
-                    Access-Control-Allow-Headers:
-                      type: string
-                    Access-Control-Allow-Methods:
-                      type: string
-                    Access-Control-Allow-Origin:
-                      type: string
+              responses: {}
             get:
               x-amazon-apigateway-integration:
                 httpMethod: POST
@@ -91,24 +58,15 @@ Resources:
                 uri:
                   'Fn::Sub': >-
                     arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Graphql.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: 200
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-                      method.response.header.Access-Control-Allow-Methods: '''options,post,get'''
-                      method.response.header.Access-Control-Allow-Origin: '''*'''
-                    responseTemplates:
-                      application/json: '{}'
-              responses:
-                '200':
-                  headers:
-                    Access-Control-Allow-Headers:
-                      type: string
-                    Access-Control-Allow-Methods:
-                      type: string
-                    Access-Control-Allow-Origin:
-                      type: string
+              responses: {}
+            options:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri:
+                  'Fn::Sub': >-
+                    arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Graphql.Arn}/invocations
+              responses: {}
   GraphqlLambdaPermission:
     Type: 'AWS::Lambda::Permission'
     DependsOn:
