@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: 'SAM template for Serverless framework service: '
 Resources:
-  Hello:
+  Graphql:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: us.imageland.Handler
@@ -14,7 +14,14 @@ Resources:
         Event1:
           Type: Api
           Properties:
-            Path: /hello
+            Path: /graphql
+            Method: post
+            RestApiId:
+              Ref: Lambda
+        Event2:
+          Type: Api
+          Properties:
+            Path: /graphql
             Method: get
             RestApiId:
               Ref: Lambda
@@ -28,21 +35,86 @@ Resources:
           title:
             Ref: 'AWS::StackName'
         paths:
-          /hello:
+          /graphql:
+            options:
+              x-amazon-apigateway-integration:
+                type: mock
+                requestTemplates:
+                  application/json: '{ "statusCode" : 200 }'
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+                      method.response.header.Access-Control-Allow-Methods: '''options,post,get'''
+                      method.response.header.Access-Control-Allow-Origin: '''*'''
+                    responseTemplates:
+                      application/json: '{}'
+              responses:
+                '200':
+                  headers:
+                    Access-Control-Allow-Headers:
+                      type: string
+                    Access-Control-Allow-Methods:
+                      type: string
+                    Access-Control-Allow-Origin:
+                      type: string
+            post:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri:
+                  'Fn::Sub': >-
+                    arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Graphql.Arn}/invocations
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+                      method.response.header.Access-Control-Allow-Methods: '''post'''
+                      method.response.header.Access-Control-Allow-Origin: '''*'''
+                    responseTemplates:
+                      application/json: '{}'
+              responses:
+                '200':
+                  headers:
+                    Access-Control-Allow-Headers:
+                      type: string
+                    Access-Control-Allow-Methods:
+                      type: string
+                    Access-Control-Allow-Origin:
+                      type: string
             get:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy
                 uri:
                   'Fn::Sub': >-
-                    arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Hello.Arn}/invocations
-              responses: {}
-  HelloLambdaPermission:
+                    arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Graphql.Arn}/invocations
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+                      method.response.header.Access-Control-Allow-Methods: '''options,post,get'''
+                      method.response.header.Access-Control-Allow-Origin: '''*'''
+                    responseTemplates:
+                      application/json: '{}'
+              responses:
+                '200':
+                  headers:
+                    Access-Control-Allow-Headers:
+                      type: string
+                    Access-Control-Allow-Methods:
+                      type: string
+                    Access-Control-Allow-Origin:
+                      type: string
+  GraphqlLambdaPermission:
     Type: 'AWS::Lambda::Permission'
     DependsOn:
-      - Hello
+      - Graphql
     Properties:
       Action: 'lambda:InvokeFunction'
       FunctionName:
-        Ref: Hello
+        Ref: Graphql
       Principal: apigateway.amazonaws.com
