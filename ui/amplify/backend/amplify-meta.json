@@ -1,14 +1,51 @@
 {
-    "providers": {
-        "awscloudformation": {
-            "AuthRoleName": "ui-20180902171754-authRole",
-            "UnauthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "ui-20180902171754-deployment",
-            "UnauthRoleName": "ui-20180902171754-unauthRole",
-            "StackName": "ui-20180902171754",
-            "StackId": "arn:aws:cloudformation:us-east-1:965717234829:stack/ui-20180902171754/09d1c9f0-aefe-11e8-897c-50d5cd26c2d2"
-        }
-    }
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "ui-20180902171754-authRole",
+			"UnauthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "ui-20180902171754-deployment",
+			"UnauthRoleName": "ui-20180902171754-unauthRole",
+			"StackName": "ui-20180902171754",
+			"StackId": "arn:aws:cloudformation:us-east-1:965717234829:stack/ui-20180902171754/09d1c9f0-aefe-11e8-897c-50d5cd26c2d2"
+		}
+	},
+	"auth": {
+		"cognito02d6ec4a": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
+				"logicalId": "authcognito02d6ec4a"
+			},
+			"lastPushTimeStamp": "2018-09-02T22:50:28.186Z",
+			"output": {
+				"AppClientSecret": "bksf62kv477j3hqjofa53u4lm1go3p2cg0a7mhce6mvupkf2v2g",
+				"UserPoolId": "us-east-1_9TMby07x2",
+				"AppClientIDWeb": "1jb2i9a8uj62qtle8m88ktdcji",
+				"AppClientID": "6tgfafctlk4i2ac3883e72n6qv",
+				"IdentityPoolId": "us-east-1:2131e94e-04f0-4260-9a0a-7c7832ee3d1c",
+				"IdentityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
+				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a"
+			},
+			"lastPushDirHash": "vzhDr3xQRxy7jikb3L7Pi5bkMME="
+		}
+	},
+	"storage": {
+		"s3images": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"logicalId": "storages3images"
+			},
+			"lastPushTimeStamp": "2018-09-02T22:50:28.189Z",
+			"output": {
+				"BucketName": "images-imageland-us",
+				"Region": "us-east-1"
+			},
+			"lastPushDirHash": "80PNeoeHMsw+9y3yLeE/vuHAQhE="
+		}
+	}
 }
