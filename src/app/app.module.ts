@@ -2,23 +2,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { ReactiveFormsModule }    from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
-import { MainComponent } from './main/main.component';
-import { SearchComponent } from './search/search.component';
-import { FolderComponent } from './folder/folder.component';
-import { UploadComponent } from './upload/upload.component';
-import { CartComponent } from './cart/cart.component';
-import { SettingsComponent } from './settings/settings.component';
-import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { SearchComponent } from './components/search/search.component';
+import { FolderComponent } from './components/folder/folder.component';
+import { UploadComponent } from './components/upload/upload.component';
+import { CartComponent } from './components/cart/cart.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     SidebarComponent,
     HeaderComponent,
-    MainComponent,
+    HomeComponent,
     SearchComponent,
     FolderComponent,
     UploadComponent,

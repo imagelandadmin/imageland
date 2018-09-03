@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { SearchComponent } from './search/search.component'; 
-import { CartComponent } from './cart/cart.component'; 
-import { FolderComponent } from './folder/folder.component'; 
-import { UploadComponent } from './upload/upload.component'; 
-import { SettingsComponent } from './settings/settings.component'; 
-import { ProfileComponent } from './profile/profile.component'; 
-import { RegisterComponent } from './register/register.component'; 
-import { AuthService } from './auth.service';
+import { HomeComponent } from './components/home/home.component';
+import { SearchComponent } from './components/search/search.component'; 
+import { CartComponent } from './components/cart/cart.component'; 
+import { FolderComponent } from './components/folder/folder.component'; 
+import { UploadComponent } from './components/upload/upload.component'; 
+import { SettingsComponent } from './components/settings/settings.component'; 
+import { ProfileComponent } from './components/profile/profile.component'; 
+import { RegisterComponent } from './components/register/register.component'; 
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
     path: "",
-    component: MainComponent
+    component: HomeComponent
   },{
     path: "register",
     component: RegisterComponent
@@ -43,7 +43,7 @@ const routes: Routes = [
     canActivate: [AuthService]
   },{
     path: "logout",
-    component: MainComponent,
+    component: HomeComponent,
     canActivate: [AuthService]
   }
 ];
