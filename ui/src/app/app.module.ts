@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import { ApolloBoostModule, ApolloBoost } from "apollo-angular-boost";
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,9 @@ import { SearchComponent } from './search/search.component';
 import { FolderComponent } from './folder/folder.component';
 import { UploadComponent } from './upload/upload.component';
 import { CartComponent } from './cart/cart.component';
-import { GraphQLModule } from './graphql.module';
+import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { GraphQLModule } from './graphql.module';
     SearchComponent,
     FolderComponent,
     UploadComponent,
-    CartComponent
+    CartComponent,
+    SettingsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +38,11 @@ import { GraphQLModule } from './graphql.module';
     FileUploadModule,
     MatButtonModule,
     MatCheckboxModule,
-    GraphQLModule,
-    ApolloBoostModule
+    AmplifyAngularModule
   ],
-  providers: [],
+  providers: [
+    AmplifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

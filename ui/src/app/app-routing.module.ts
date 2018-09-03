@@ -5,6 +5,8 @@ import { SearchComponent } from './search/search.component';
 import { CartComponent } from './cart/cart.component'; 
 import { FolderComponent } from './folder/folder.component'; 
 import { UploadComponent } from './upload/upload.component'; 
+import { SettingsComponent } from './settings/settings.component'; 
+import { ProfileComponent } from './profile/profile.component'; 
 
 const routes: Routes = [
   {
@@ -22,6 +24,12 @@ const routes: Routes = [
   },{
     path: "upload",
     component: UploadComponent
+  },{
+    path: "settings",
+    component: SettingsComponent
+  },{
+    path: "profile",
+    component: ProfileComponent
   }
 ];
 

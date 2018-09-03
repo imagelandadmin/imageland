@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Apollo, gql} from 'apollo-angular-boost';
 
 @Component({
   selector: 'app-main',
@@ -8,24 +7,10 @@ import {Apollo, gql} from 'apollo-angular-boost';
 })
 export class MainComponent implements OnInit {
 
-  msg: String = "default";
-
-  constructor(private apollo: Apollo) { 
-
-  }
+  msg: String = "Welcome to Imageland!";
 
   ngOnInit() {
-    this.apollo
-      .watchQuery({
-        query: gql`{welcome}`,
-      })
-      .valueChanges.subscribe(result => {
-        console.log("begin")
-        console.log(result)
-        console.log(result.data)
-        console.log(result.errors)
-        console.log("end")
-      });
+
   }
 
 }
