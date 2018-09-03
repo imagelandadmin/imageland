@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { ReactiveFormsModule }    from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,8 @@ import { UploadComponent } from './upload/upload.component';
 import { CartComponent } from './cart/cart.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { ProfileComponent } from './profile/profile.component';
     UploadComponent,
     CartComponent,
     SettingsComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { ProfileComponent } from './profile/profile.component';
     FileUploadModule,
     MatButtonModule,
     MatCheckboxModule,
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    ReactiveFormsModule
   ],
   providers: [
     AmplifyService

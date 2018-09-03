@@ -8,8 +8,12 @@ import { AmplifyService } from 'aws-amplify-angular';
 })
 export class AppComponent {
   title = 'ui';
+  signedIn: boolean = false;
 
   constructor(private amplifyService: AmplifyService) {
-
+    this.amplifyService.authStateChange$
+      .subscribe(authState => {
+          this.signedIn = authState.state === 'signedIn';
+      });
   }
 }

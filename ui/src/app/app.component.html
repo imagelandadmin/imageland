@@ -1,9 +1,11 @@
 <div id="container">
   
   <app-sidebar></app-sidebar>
-
+  
   <div id="content">
-    <!--<amplify-authenticator></amplify-authenticator>-->
     <router-outlet></router-outlet>
+    <span *ngIf="!signedIn">
+      <app-login></app-login>
+    </span>
   </div>
 </div>

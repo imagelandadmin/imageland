@@ -7,29 +7,44 @@ import { FolderComponent } from './folder/folder.component';
 import { UploadComponent } from './upload/upload.component'; 
 import { SettingsComponent } from './settings/settings.component'; 
 import { ProfileComponent } from './profile/profile.component'; 
+import { RegisterComponent } from './register/register.component'; 
+import { AuthService } from './auth.service';
 
 const routes: Routes = [
   {
     path: "",
     component: MainComponent
   },{
+    path: "register",
+    component: RegisterComponent
+  },{
     path: "search",
-    component: SearchComponent
+    component: SearchComponent,
+    canActivate: [AuthService]
   },{
     path: "folder",
-    component: FolderComponent
+    component: FolderComponent,
+    canActivate: [AuthService]
   },{
     path: "cart",
-    component: CartComponent
+    component: CartComponent,
+    canActivate: [AuthService]
   },{
     path: "upload",
-    component: UploadComponent
+    component: UploadComponent,
+    canActivate: [AuthService]
   },{
     path: "settings",
-    component: SettingsComponent
+    component: SettingsComponent,
+    canActivate: [AuthService]
   },{
     path: "profile",
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthService]
+  },{
+    path: "logout",
+    component: MainComponent,
+    canActivate: [AuthService]
   }
 ];
 
