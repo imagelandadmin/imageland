@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AmplifyService } from 'aws-amplify-angular';
+import { Component, Inject } from '@angular/core';
+import { IAuthService_Token, IAuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +8,13 @@ import { AmplifyService } from 'aws-amplify-angular';
 })
 export class AppComponent {
   title = 'ui';
-  signedIn: boolean = false;
 
-  constructor(private amplifyService: AmplifyService) {
-    this.amplifyService.authStateChange$
-      .subscribe(authState => {
-          this.signedIn = authState.state === 'signedIn';
-      });
+  constructor(@Inject(IAuthService_Token) private auth: IAuthService) {
+
   }
+
+  isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
+  
 }

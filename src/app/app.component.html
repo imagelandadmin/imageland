@@ -4,7 +4,7 @@
   
   <div id="content">
     <router-outlet></router-outlet>
-    <span *ngIf="!signedIn">
+    <span *ngIf="!isLoggedIn()">
       <app-login></app-login>
     </span>
   </div>

@@ -1,12 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Auth } from 'aws-amplify';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService implements CanActivate {
+export let IAuthService_Token = new InjectionToken<IAuthService>('IAuthService');
+
+export interface IAuthService extends CanActivate {
+  login(email: string, pass: string);
+  logout();
+  isLoggedIn(): boolean;
+  register(email: string, pass: string, firstname: string, lastname: string);
+  forgotPassword();
+}
+
+@Injectable({ providedIn: 'root' })
+export class AuthService implements IAuthService {
 
   signedIn: boolean = false;
 
@@ -22,6 +30,10 @@ export class AuthService implements CanActivate {
       this.logout();
       return true;
     }
+    return this.signedIn;
+  }
+
+  isLoggedIn(): boolean {
     return this.signedIn;
   }
 
