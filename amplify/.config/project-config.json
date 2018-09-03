@@ -1,6 +1,6 @@
 {
-    "projectName": "ui",
-    "projectPath": "/src/imageland/ui",
+    "projectName": "imageland",
+    "projectPath": "/src/imageland",
     "defaultEditor": "code",
     "frontendHandler": {
         "javascript": "/usr/local/lib/node_modules/@aws-amplify/cli/node_modules/amplify-frontend-javascript"
@@ -9,7 +9,7 @@
         "framework": "angular",
         "config": {
             "SourceDir": "src",
-            "DistributionDir": "dist/ui",
+            "DistributionDir": "dist",
             "BuildCommand": "npm run-script build",
             "StartCommand": "ng serve"
         }
