@@ -6,7 +6,7 @@
             "Type": "AWS::S3::Bucket",
             "DeletionPolicy": "Retain",
             "Properties": {
-                "BucketName": "dev-ui-imageland-us",
+                "BucketName": "dev.imageland.us",
                 "AccessControl": "PublicRead",
                 "WebsiteConfiguration": {
                     "IndexDocument": "index.html",

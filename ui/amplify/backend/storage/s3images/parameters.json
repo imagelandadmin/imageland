@@ -1,5 +1,5 @@
 {
-    "bucketName": "images-imageland-us",
+    "bucketName": "images.imageland.us",
     "authPolicyName": "s3_amplify_ef4270db",
     "unauthPolicyName": "s3_amplify_ef4270db",
     "authRoleName": "ui-20180902171754-authRole",

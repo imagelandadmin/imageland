@@ -6,11 +6,11 @@ const awsmobile =  {
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_9TMby07x2",
     "aws_user_pools_web_client_id": "1jb2i9a8uj62qtle8m88ktdcji",
-    "aws_user_files_s3_bucket": "images-imageland-us",
+    "aws_user_files_s3_bucket": "images.imageland.us",
     "aws_user_files_s3_bucket_region": "us-east-1",
-    "aws_content_delivery_bucket": "dev-ui-imageland-us",
+    "aws_content_delivery_bucket": "dev.imageland.us",
     "aws_content_delivery_bucket_region": "us-east-1",
-    "aws_content_delivery_url": "http://dev-ui-imageland-us.s3-website-us-east-1.amazonaws.com"
+    "aws_content_delivery_url": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com"
 };
 
 

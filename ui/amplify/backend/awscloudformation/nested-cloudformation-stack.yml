@@ -134,7 +134,7 @@
 			"Properties": {
 				"TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"Parameters": {
-					"bucketName": "images-imageland-us",
+					"bucketName": "images.imageland.us",
 					"authPolicyName": "s3_amplify_ef4270db",
 					"unauthPolicyName": "s3_amplify_ef4270db",
 					"authRoleName": "ui-20180902171754-authRole",
