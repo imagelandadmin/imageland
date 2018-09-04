@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  msg: String = "Welcome to Imageland!";
+  msg: String = "Welcome, Stephen to Imageland!";
 
   ngOnInit() {
 
