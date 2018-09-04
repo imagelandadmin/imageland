@@ -1,18 +1,24 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAuthService_Token, IAuthService } from '../../services/auth.service';
+import { BaseComponent } from '../base/base.component';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, @Inject(IAuthService_Token) private auth: IAuthService) { 
-
+  constructor(
+    private formBuilder: FormBuilder, 
+    private dialogRef: MatDialogRef<LoginComponent>,
+    @Inject(IAuthService_Token) private auth: IAuthService) 
+  { 
+    super();
   }
 
   ngOnInit() {
@@ -26,5 +32,6 @@ export class LoginComponent implements OnInit {
     var email = this.loginForm.controls.email.value
     var pass = this.loginForm.controls.password.value
     this.auth.login(email, pass);
+    this.dialogRef.close();
   }
 }

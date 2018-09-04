@@ -1,15 +1,16 @@
 //modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
-import { MatButtonModule, MatCheckboxModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AmplifyAngularModule } from 'aws-amplify-angular';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 //components
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app/app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -46,12 +47,15 @@ import { IAuthService_Token, AuthService } from './services/auth.service';
   imports: [
     //modules
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FileUploadModule,
     MatButtonModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     AmplifyAngularModule,
     ReactiveFormsModule
   ],
@@ -60,7 +64,8 @@ import { IAuthService_Token, AuthService } from './services/auth.service';
     AmplifyService,
     { provide: IAuthService_Token, useClass: AuthService }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginComponent]
 })
 export class AppModule { 
 

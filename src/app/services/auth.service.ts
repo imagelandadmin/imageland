@@ -16,12 +16,12 @@ export interface IAuthService extends CanActivate {
 @Injectable({ providedIn: 'root' })
 export class AuthService implements IAuthService {
 
-  signedIn: boolean = false;
+  private static signedIn: boolean = false;
 
   constructor(private router: Router, private amplify: AmplifyService) {
     this.amplify.authStateChange$
       .subscribe(authState => {
-        this.signedIn = authState.state === 'signedIn';
+        AuthService.signedIn = authState.state == "signedIn";
     });
   }
 
@@ -30,11 +30,11 @@ export class AuthService implements IAuthService {
       this.logout();
       return true;
     }
-    return this.signedIn;
+    return AuthService.signedIn;
   }
 
   isLoggedIn(): boolean {
-    return this.signedIn;
+    return AuthService.signedIn;
   }
 
   login(email: string, pass: string) {
@@ -42,7 +42,10 @@ export class AuthService implements IAuthService {
       .then(user => {
         this.router.navigate(["/"]);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.router.navigate(["/"]);
+      });
   }
 
   logout() {
