@@ -2,6 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAuthService_Token, IAuthService } from '../../services/auth.service';
 import { BaseComponent } from '../base/base.component';
+import { LoginComponent } from '../login/login.component';
+import { MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +17,9 @@ export class RegisterComponent extends BaseComponent {
 
   constructor(
     private formBuilder: FormBuilder, 
-    @Inject(IAuthService_Token) private auth: IAuthService) 
+    @Inject(IAuthService_Token) private auth: IAuthService,
+    private dialogRef: MatDialogRef<RegisterComponent>,
+    private dialog: MatDialog) 
   { 
     super();
   }
@@ -34,5 +39,13 @@ export class RegisterComponent extends BaseComponent {
     let first = this.registerForm.controls.firstname.value;
     let last = this.registerForm.controls.lastname.value;
     this.auth.register(email, pass, first, last);
+  }
+
+  onLogin() {
+    this.dialogRef.close();
+    this.dialog.open(LoginComponent, {
+      disableClose: true,
+      closeOnNavigation: true
+    });
   }
 }

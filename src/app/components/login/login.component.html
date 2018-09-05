@@ -14,12 +14,12 @@
             </div>
             <mat-dialog-actions>
                 <div class="form-group">
-                    <a [routerLink]="['/register']" mat-button class="btn btn-primary">Register</a>
+                    <button mat-button class="btn btn-primary" (click)="onRegister()">Register</button>
                     <a [routerLink]="['/forgotPassword']" mat-button class="btn btn-primary">Forgot Password</a>
                 </div>
                 <div class="form-group">
-                        <button mat-button class="btn btn-primary">Login</button>
-                    </div>
+                    <button mat-button class="btn btn-primary">Login</button>
+                 </div>
             </mat-dialog-actions>
         </mat-dialog-content>
     </form>

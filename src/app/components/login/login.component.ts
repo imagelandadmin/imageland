@@ -2,7 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAuthService_Token, IAuthService } from '../../services/auth.service';
 import { BaseComponent } from '../base/base.component';
+import { RegisterComponent } from '../register/register.component';
 import { MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent extends BaseComponent {
   constructor(
     private formBuilder: FormBuilder, 
     private dialogRef: MatDialogRef<LoginComponent>,
+    private dialog: MatDialog,
     @Inject(IAuthService_Token) private auth: IAuthService) 
   { 
     super();
@@ -33,5 +36,13 @@ export class LoginComponent extends BaseComponent {
     var pass = this.loginForm.controls.password.value
     this.auth.login(email, pass);
     this.dialogRef.close();
+  }
+
+  onRegister() {
+    this.dialogRef.close();
+    this.dialog.open(RegisterComponent, {
+      disableClose: true,
+      closeOnNavigation: true
+    });
   }
 }
