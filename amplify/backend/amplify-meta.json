@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
 				"logicalId": "authcognito02d6ec4a"
 			},
-			"lastPushTimeStamp": "2018-09-03T00:17:41.514Z",
+			"lastPushTimeStamp": "2018-09-05T05:04:13.432Z",
 			"output": {
 				"AppClientSecret": "bksf62kv477j3hqjofa53u4lm1go3p2cg0a7mhce6mvupkf2v2g",
 				"UserPoolId": "us-east-1_9TMby07x2",
@@ -29,7 +29,7 @@
 				"IdentityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
 				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a"
 			},
-			"lastPushDirHash": "vzhDr3xQRxy7jikb3L7Pi5bkMME="
+			"lastPushDirHash": "F98XrYNixxVfGqrTjXvXhE2DHMA="
 		}
 	},
 	"storage": {
@@ -40,7 +40,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"logicalId": "storages3images"
 			},
-			"lastPushTimeStamp": "2018-09-03T00:17:41.518Z",
+			"lastPushTimeStamp": "2018-09-05T05:04:13.429Z",
 			"output": {
 				"BucketName": "images.imageland.us",
 				"Region": "us-east-1"
@@ -56,7 +56,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-03T00:17:41.517Z",
+			"lastPushTimeStamp": "2018-09-05T05:04:13.431Z",
 			"output": {
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
 				"WebsiteURL": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com",
