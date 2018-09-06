@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material';
 export class RegisterComponent extends BaseComponent {
 
   private registerForm: FormGroup;
+  public registrationErrorMsg: String;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -25,6 +26,7 @@ export class RegisterComponent extends BaseComponent {
   }
 
   ngOnInit() {
+    this.registrationErrorMsg = "";
     this.registerForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -38,7 +40,13 @@ export class RegisterComponent extends BaseComponent {
     let pass = this.registerForm.controls.password.value;
     let first = this.registerForm.controls.firstname.value;
     let last = this.registerForm.controls.lastname.value;
-    this.auth.register(email, pass, first, last);
+    this.auth.register(email, pass, first, last)
+      .then(user => {
+        this.dialogRef.close();
+      })
+      .catch(err => {
+        this.registrationErrorMsg = "Registration failed.";
+      });
   }
 
   onLogin() {

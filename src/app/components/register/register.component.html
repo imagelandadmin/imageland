@@ -20,6 +20,9 @@
                     <input matInput type="text" formControlName="lastname" class="form-control" placeholder="Last Name"/>
                 </mat-form-field>
             </div>
+            <div class="form-error" *ngIf="registrationErrorMsg">
+                {{ registrationErrorMsg }}
+            </div>
             <mat-dialog-actions>
                 <div class="form-group">
                     <button mat-button class="btn btn-link" (click)="onLogin()">Login</button>
