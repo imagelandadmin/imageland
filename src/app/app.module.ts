@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
 //services
 import { AmplifyService } from 'aws-amplify-angular';
 import { IAuthService_Token, AuthService } from './services/auth.service';
+import { IErrorService_Token, ErrorService } from './services/error.service';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { IAuthService_Token, AuthService } from './services/auth.service';
   providers: [
     //services
     AmplifyService,
-    { provide: IAuthService_Token, useClass: AuthService }
+    { provide: IAuthService_Token, useClass: AuthService },
+    { provide: IErrorService_Token, useClass: ErrorService }
   ],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]

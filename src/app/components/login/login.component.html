@@ -12,6 +12,9 @@
                     <input matInput type="password" formControlName="password" class="form-control" placeholder="Password"/>
                 </mat-form-field>
             </div>
+            <div class="form-error" *ngIf="loginErrorMsg">
+                {{ loginErrorMsg }}
+            </div>
             <mat-dialog-actions>
                 <div class="form-group">
                     <button mat-button class="btn btn-primary" (click)="onRegister()">Register</button>

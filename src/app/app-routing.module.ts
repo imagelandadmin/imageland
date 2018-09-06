@@ -10,39 +10,51 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component'; 
 import { AuthService } from './services/auth.service';
 
+export const enum Route {
+  HOME = "/",
+  REGISTER = "/register",
+  SEARCH = "/search",
+  FOLDER = "/folder",
+  CART = "/cart",
+  UPLOAD = "/upload",
+  SETTINGS = "/settings",
+  PROFILE = "/profile",
+  LOGOUT = "/logout"
+}
+
 const routes: Routes = [
   {
-    path: "",
+    path: Route.HOME.substring(1),
     component: HomeComponent
   },{
-    path: "register",
+    path: Route.REGISTER.substring(1),
     component: RegisterComponent
   },{
-    path: "search",
+    path: Route.SEARCH.substring(1),
     component: SearchComponent,
     canActivate: [AuthService]
   },{
-    path: "folder",
+    path: Route.FOLDER.substring(1),
     component: FolderComponent,
     canActivate: [AuthService]
   },{
-    path: "cart",
+    path: Route.CART.substring(1),
     component: CartComponent,
     canActivate: [AuthService]
   },{
-    path: "upload",
+    path: Route.UPLOAD.substring(1),
     component: UploadComponent,
     canActivate: [AuthService]
   },{
-    path: "settings",
+    path: Route.SETTINGS.substring(1),
     component: SettingsComponent,
     canActivate: [AuthService]
   },{
-    path: "profile",
+    path: Route.PROFILE.substring(1),
     component: ProfileComponent,
     canActivate: [AuthService]
   },{
-    path: "logout",
+    path: Route.LOGOUT.substring(1),
     component: HomeComponent,
     canActivate: [AuthService]
   }
