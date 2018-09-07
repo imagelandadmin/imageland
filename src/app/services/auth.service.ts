@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, Params } from '@angular/router';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Auth } from 'aws-amplify';
 import { User } from '../models/schema';
@@ -15,6 +15,7 @@ export interface IAuthService extends CanActivate {
   logout(): Promise<void>;
   isLoggedIn(): boolean;
   register(email: string, pass: string, firstname: string, lastname: string): Promise<void>;
+  confirmRegistration(email: string, code: string): Promise<void>;
   forgotPassword(email: string): Promise<void>;
   changePassword(email: string, oldPass: string, newPass: string): Promise<void>;
 }
@@ -23,12 +24,17 @@ export interface IAuthService extends CanActivate {
 export class AuthService implements IAuthService {
 
   private static signedIn: boolean = false;
+  private static verificationCode: string = "";
 
   constructor(private router: Router, private amplify: AmplifyService) {
     this.amplify.authStateChange$
       .subscribe(authState => {
         log.debug(`Auth state changed to ${authState.state}`);
         AuthService.signedIn = authState.state == "signedIn";
+    });
+
+    this.router.routerState.root.queryParams.subscribe((params: Params) => {
+      AuthService.verificationCode = params['code'];
     });
   }
 
@@ -47,6 +53,11 @@ export class AuthService implements IAuthService {
   }
 
   async login(email: string, pass: string): Promise<User> {
+    if(AuthService.verificationCode) {
+      await this.confirmRegistration(email, AuthService.verificationCode);
+      AuthService.verificationCode = "";
+    }
+
     let user = await Auth.signIn(email, pass)
       .catch(err => {
         log.error(`While attempting to login ${email}: \n${JSON.stringify(err)}`);
@@ -83,6 +94,15 @@ export class AuthService implements IAuthService {
     });
 
     this.router.navigate([Route.HOME]);
+  }
+
+  async confirmRegistration(email: string, code: string): Promise<void> {
+    log.info(`Confirming registration code=${code}`);
+    return await Auth.confirmSignUp(email, code, { forceAliasCreation: true })
+      .catch(err => {
+        log.error(`While confirming user registration for ${email}: \n${JSON.stringify(err)}`);
+        throw err;
+      });
   }
 
   async forgotPassword(email: string): Promise<void> {

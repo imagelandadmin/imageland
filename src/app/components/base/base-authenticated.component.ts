@@ -20,7 +20,7 @@ export abstract class BaseAuthenticatedComponent extends BaseComponent {
         super();
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         super.ngOnInit();
         if(this.needsAuth() && !BaseAuthenticatedComponent.dialogOpen) {
             this.showLoginDialog();

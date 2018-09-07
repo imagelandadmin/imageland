@@ -19,17 +19,17 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
 				"logicalId": "authcognito02d6ec4a"
 			},
-			"lastPushTimeStamp": "2018-09-07T00:35:35.394Z",
+			"lastPushTimeStamp": "2018-09-07T05:06:09.295Z",
 			"output": {
-				"AppClientSecret": "bksf62kv477j3hqjofa53u4lm1go3p2cg0a7mhce6mvupkf2v2g",
-				"UserPoolId": "us-east-1_9TMby07x2",
-				"AppClientIDWeb": "1jb2i9a8uj62qtle8m88ktdcji",
-				"AppClientID": "6tgfafctlk4i2ac3883e72n6qv",
+				"AppClientSecret": "19o5in7723ohtnsh8p8v5qf90k6e68h85lkquoi9db5avfb4i0ga",
+				"UserPoolId": "us-east-1_MdVIQVx3z",
+				"AppClientIDWeb": "43ofepfk5g5ik05f0ec1oi0u6n",
+				"AppClientID": "3r12sj5kstnmm0286nvfikbb1r",
 				"IdentityPoolId": "us-east-1:2131e94e-04f0-4260-9a0a-7c7832ee3d1c",
 				"IdentityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
 				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a"
 			},
-			"lastPushDirHash": "dv+U9RlmPHQuGeN9EjodRUMcxU4="
+			"lastPushDirHash": "I9wd8na6r/AKles3i+LCo9YwTPY="
 		}
 	},
 	"storage": {
@@ -40,7 +40,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"logicalId": "storages3images"
 			},
-			"lastPushTimeStamp": "2018-09-07T00:35:35.392Z",
+			"lastPushTimeStamp": "2018-09-07T05:06:09.292Z",
 			"output": {
 				"BucketName": "images.imageland.us",
 				"Region": "us-east-1"
@@ -56,7 +56,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-07T00:35:35.394Z",
+			"lastPushTimeStamp": "2018-09-07T05:06:09.294Z",
 			"output": {
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
 				"WebsiteURL": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com",
