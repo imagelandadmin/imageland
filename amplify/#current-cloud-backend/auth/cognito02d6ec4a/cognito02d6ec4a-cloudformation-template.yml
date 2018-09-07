@@ -185,10 +185,8 @@ Resources:
           Name: email
           Required: true
           Mutable: true
-        
-      # Temporarily disable email verification requirement
-      # AutoVerifiedAttributes: !Ref autoVerifiedAttributes
-      
+
+      AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
       EmailVerificationMessage: !Ref emailVerificationMessage
       EmailVerificationSubject: !Ref emailVerificationSubject

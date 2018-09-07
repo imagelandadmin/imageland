@@ -1,11 +1,11 @@
 .md-dialog-container {
     width: 350px;
-    height: 350px;
+    height: 375px;
 }
 
 .md-dialog-content {
     width: 350px;
-    height: 350px;
+    height: 375px;
 }
 
 .form-control {
@@ -14,4 +14,8 @@
 
 mat-form-field {
     width: 100%;
-  }
+}
+
+.form-error {
+    font-size: 75%;
+}

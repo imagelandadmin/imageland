@@ -28,14 +28,18 @@ export class RegisterComponent extends BaseComponent {
   ngOnInit() {
     this.registrationErrorMsg = "";
     this.registerForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required,
+      Validators.minLength(5)]],
+      password: ['', [Validators.required, 
+        Validators.minLength(8), 
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required]
     });
   }
 
   onSubmit() {
+    if (!this.isValid()) return;
     let email = this.registerForm.controls.email.value;
     let pass = this.registerForm.controls.password.value;
     let first = this.registerForm.controls.firstname.value;
@@ -47,6 +51,24 @@ export class RegisterComponent extends BaseComponent {
       .catch(err => {
         this.registrationErrorMsg = "Registration failed.";
       });
+  }
+
+  isValid(): boolean {
+    //TODO use angular form capabilities to display message attached to each field.
+    this.registrationErrorMsg = "";
+    if (!this.registerForm.controls.email.valid) {
+      this.registrationErrorMsg = "Must provide a valid email address.";
+    }
+    else if (!this.registerForm.controls.password.valid) {
+      this.registrationErrorMsg = "Password must be 8 characters with uppercase, lowercase, numerical, and special characters.";
+    }
+    else if (!this.registerForm.controls.firstname.valid) {
+      this.registrationErrorMsg = "First name is a required field.";
+    }
+    else if (!this.registerForm.controls.lastname.valid) {
+      this.registrationErrorMsg = "Last name is a required field.";
+    }
+    return this.registrationErrorMsg.length == 0
   }
 
   onLogin() {
