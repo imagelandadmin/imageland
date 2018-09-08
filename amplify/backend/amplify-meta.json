@@ -19,17 +19,19 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
 				"logicalId": "authcognito02d6ec4a"
 			},
-			"lastPushTimeStamp": "2018-09-07T05:06:09.295Z",
+			"lastPushTimeStamp": "2018-09-08T03:36:08.360Z",
 			"output": {
-				"AppClientSecret": "19o5in7723ohtnsh8p8v5qf90k6e68h85lkquoi9db5avfb4i0ga",
-				"UserPoolId": "us-east-1_MdVIQVx3z",
-				"AppClientIDWeb": "43ofepfk5g5ik05f0ec1oi0u6n",
-				"AppClientID": "3r12sj5kstnmm0286nvfikbb1r",
+				"AppClientSecret": "879em2cct658q6k7km1gsc41fg3l2pnbls1droladl4egftqphk",
+				"UserPoolId": "us-east-1_2hDCw7VaA",
+				"AppClientIDWeb": "31p84usklof82imdh4vqcsljvq",
+				"AppClientID": "5kklpo30ip3rncjkn6io5etmhs",
 				"IdentityPoolId": "us-east-1:2131e94e-04f0-4260-9a0a-7c7832ee3d1c",
 				"IdentityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
-				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a"
+				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a",
+				"FacebookWebClient": "495152287625522"
 			},
-			"lastPushDirHash": "I9wd8na6r/AKles3i+LCo9YwTPY="
+			"lastPushDirHash": "f+XodgsGoH/MQlKIsHR7XlFXyuU=",
+			"[object Object]": {}
 		}
 	},
 	"storage": {
@@ -40,7 +42,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"logicalId": "storages3images"
 			},
-			"lastPushTimeStamp": "2018-09-07T05:06:09.292Z",
+			"lastPushTimeStamp": "2018-09-08T03:36:08.357Z",
 			"output": {
 				"BucketName": "images.imageland.us",
 				"Region": "us-east-1"
@@ -56,7 +58,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-07T05:06:09.294Z",
+			"lastPushTimeStamp": "2018-09-08T03:36:08.359Z",
 			"output": {
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
 				"WebsiteURL": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com",

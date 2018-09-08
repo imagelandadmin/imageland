@@ -1,7 +1,7 @@
 {
     "identityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
     "allowUnauthenticatedIdentities": false,
-    "thirdPartyAuth": false,
+    "thirdPartyAuth": true,
     "lambdaLogPolicy": "cognito02d6ec4a_lambda_log_policy",
     "openIdLambdaRoleName": "cognito02d6ec4a_openid_lambda_role",
     "openIdRolePolicy": "cognito02d6ec4a_openid_pass_role_policy",
@@ -21,8 +21,8 @@
     "smsAuthenticationMessage": "Your ImageLand authentication code is {####}",
     "smsVerificationMessage": "Your ImageLand verification code is {####}",
     "emailVerificationSubject": "ImageLand email verification",
-    "emailVerificationMessage": "Welcome to ImageLand! Visit this link to verify your email and begin using the app:  http://dev.imageland.us/?email={username}&code={####}",
-    "defaultPasswordPolicy": true,
+    "emailVerificationMessage": "Welcome to ImageLand! Use this link to confirm your email, log in, and begin using the app: http://dev.imageland.us/?code={####}",
+    "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
         "Requires Lowercase",
@@ -62,5 +62,10 @@
     "unAuthRoleName": "ui-20180902171754-unauthRole",
     "authRoleName": "ui-20180902171754-authRole",
     "unAuthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-unauthRole",
-    "authRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-authRole"
+    "authRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-authRole",
+    "authProviders": [
+        "graph.facebook.com"
+    ],
+    "facebookAppId": "495152287625522",
+    "selectedParties": "{\"graph.facebook.com\":\"495152287625522\"}"
 }

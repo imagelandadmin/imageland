@@ -36,6 +36,19 @@ export class AuthService implements IAuthService {
     this.router.routerState.root.queryParams.subscribe((params: Params) => {
       AuthService.verificationCode = params['code'];
     });
+
+    let self = this;
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        self.loginFacebook();
+      }
+    });
+
+    FB.Event.subscribe('auth.authResponseChange', function(response) {
+      if (response.status === 'connected') {
+        self.loginFacebook();
+      }
+    });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -50,6 +63,25 @@ export class AuthService implements IAuthService {
 
   isLoggedIn(): boolean {
     return AuthService.signedIn;
+  }
+
+  async loginFacebook() {
+    let fbAuth = FB.getAuthResponse();
+    let self = this;
+    FB.api('/me', async function(response) {
+      await Auth.federatedSignIn('facebook', {
+        token: fbAuth.accessToken,
+        expires_at: fbAuth.expiresIn
+      }, {
+        user: response.email
+      }).catch(err => {
+        log.error(`While attempting to facebook login ${response.email}: \n${JSON.stringify(err)}`);
+        throw err;
+      });
+
+      AuthService.signedIn = (await Auth.currentAuthenticatedUser) != undefined;
+      self.router.navigate([Route.HOME]);
+    });
   }
 
   async login(email: string, pass: string): Promise<User> {

@@ -130,6 +130,15 @@ Parameters:
             
   authRoleArn:
     Type: String
+                  
+  authProviders:
+    Type: CommaDelimitedList
+      
+  facebookAppId:
+    Type: String
+            
+  selectedParties:
+    Type: String
           
 Resources:
   
@@ -185,9 +194,10 @@ Resources:
           Name: email
           Required: true
           Mutable: true
-
-      UsernameAttributes: [email]
+        
+      
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
+      
       
       EmailVerificationMessage: !Ref emailVerificationMessage
       EmailVerificationSubject: !Ref emailVerificationSubject
@@ -355,6 +365,12 @@ Resources:
             - cognito-idp.${region}.amazonaws.com/${client}
             - { region: !Ref "AWS::Region",  client: !Ref UserPool}
             
+      SupportedLoginProviders: 
+        
+          
+          graph.facebook.com: '495152287625522'
+                   
+      
       AllowUnauthenticatedIdentities: !Ref allowUnauthenticatedIdentities
        
        
@@ -399,5 +415,8 @@ Outputs :
    
    
   
+  
+  FacebookWebClient:
+    Value: 495152287625522
    
   

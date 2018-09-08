@@ -5,6 +5,9 @@ import { BaseComponent } from '../base/base.component';
 import { RegisterComponent } from '../register/register.component';
 import { MatDialogRef } from '@angular/material';
 import { MatDialog } from '@angular/material';
+import { Logger } from 'aws-amplify';
+
+const log = new Logger('login');
 
 @Component({
   selector: 'app-login',
@@ -23,6 +26,7 @@ export class LoginComponent extends BaseComponent {
     @Inject(IAuthService_Token) private auth: IAuthService) 
   { 
     super();
+    log.info('Constructed login component.');
   }
 
   ngOnInit() {
