@@ -61,6 +61,69 @@
                     "Ref": "S3Bucket"
                 }
             }
+        },
+        "CloudFrontDistribution": {
+            "Type": "AWS::CloudFront::Distribution",
+            "DependsOn": "S3Bucket",
+            "Properties": {
+                "DistributionConfig": {
+                    "Aliases": ["dev.imageland.us"],
+                    "ViewerCertificate": {
+                        "SslSupportMethod": "sni-only",
+                        "AcmCertificateArn": "arn:aws:acm:us-east-1:965717234829:certificate/23295791-910d-4f7d-adca-89245845d112"
+                    },
+                    "Origins": [
+                        {
+                            "DomainName": {
+                                "Fn::GetAtt": [
+                                    "S3Bucket",
+                                    "DomainName"
+                                ]
+                            },
+                            "Id": "hostingS3Bucket",
+                            "S3OriginConfig": {}
+                        }
+                    ],
+                    "Enabled": "true",
+                    "DefaultCacheBehavior": {
+                        "AllowedMethods": [
+                            "GET",
+                            "HEAD",
+                            "OPTIONS"
+                        ],
+                        "TargetOriginId": "hostingS3Bucket",
+                        "ForwardedValues": {
+                            "QueryString": "false"
+                        },
+                        "ViewerProtocolPolicy": "redirect-to-https",
+                        "DefaultTTL": "120",
+                        "MaxTTL": "300",
+                        "MinTTL": "30",
+                        "Compress": "true"
+                    },
+                    "DefaultRootObject": "index.html",
+                    "CustomErrorResponses": [
+                        {
+                            "ErrorCachingMinTTL": 300,
+                            "ErrorCode": 400,
+                            "ResponseCode": 200,
+                            "ResponsePagePath": "/"
+                        },
+                        {
+                            "ErrorCachingMinTTL": 300,
+                            "ErrorCode": 403,
+                            "ResponseCode": 200,
+                            "ResponsePagePath": "/"
+                        },
+                        {
+                            "ErrorCachingMinTTL": 300,
+                            "ErrorCode": 404,
+                            "ResponseCode": 200,
+                            "ResponsePagePath": "/"
+                        }
+                    ]
+                }
+            }
         }
     },
     "Outputs": {

@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
 				"logicalId": "authcognito02d6ec4a"
 			},
-			"lastPushTimeStamp": "2018-09-08T03:36:08.360Z",
+			"lastPushTimeStamp": "2018-09-08T15:00:26.376Z",
 			"output": {
 				"AppClientSecret": "879em2cct658q6k7km1gsc41fg3l2pnbls1droladl4egftqphk",
 				"UserPoolId": "us-east-1_2hDCw7VaA",
@@ -30,7 +30,7 @@
 				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a",
 				"FacebookWebClient": "495152287625522"
 			},
-			"lastPushDirHash": "f+XodgsGoH/MQlKIsHR7XlFXyuU=",
+			"lastPushDirHash": "5oiiuXsTDTsx2EEmf08Ua8laFsw=",
 			"[object Object]": {}
 		}
 	},
@@ -42,12 +42,12 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"logicalId": "storages3images"
 			},
-			"lastPushTimeStamp": "2018-09-08T03:36:08.357Z",
+			"lastPushTimeStamp": "2018-09-08T15:00:26.374Z",
 			"output": {
 				"BucketName": "images.imageland.us",
 				"Region": "us-east-1"
 			},
-			"lastPushDirHash": "MY/K4XiQZrXcdyBwd3h84XV5RVM="
+			"lastPushDirHash": "BNyScsISsa4i1sQ1aCtZ+zxDQYI="
 		}
 	},
 	"hosting": {
@@ -58,14 +58,14 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-08T03:36:08.359Z",
+			"lastPushTimeStamp": "2018-09-08T15:00:26.376Z",
 			"output": {
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
 				"WebsiteURL": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com",
 				"Region": "us-east-1",
 				"HostingBucketName": "dev.imageland.us"
 			},
-			"lastPushDirHash": "9TAoDtVv3Dhg7ziukAhHxbLyZC8="
+			"lastPushDirHash": "RDlpbjTMNj35hNm2bK6Xa74YZ0k="
 		}
 	}
 }

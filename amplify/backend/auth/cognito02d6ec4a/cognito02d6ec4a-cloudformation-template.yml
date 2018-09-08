@@ -412,10 +412,6 @@ Outputs :
   AppClientSecret:
     Value: !GetAtt UserPoolClientInputs.appSecret
   
-   
-   
-  
-  
   FacebookWebClient:
     Value: 495152287625522
    
