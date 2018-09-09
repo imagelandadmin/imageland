@@ -1,7 +1,7 @@
 //modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
@@ -27,7 +27,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AmplifyService } from 'aws-amplify-angular';
 import { IAuthService_Token, AuthService } from './services/auth.service';
 import { IErrorService_Token, ErrorService } from './services/error.service';
-
+import { FacebookSdkLoader } from './services/facebook-sdk';
 
 @NgModule({
   declarations: [
@@ -62,6 +62,12 @@ import { IErrorService_Token, ErrorService } from './services/error.service';
   ],
   providers: [
     //services
+    // Note: We need the APP_INITIALIZER below to ensure the facebook sdk has 
+    // finished downloading before the rest of angular bootstraps... ugh
+    FacebookSdkLoader, 
+    { provide: APP_INITIALIZER, 
+      useFactory: (loader: FacebookSdkLoader) => () => loader.loadFacebookSdk(), 
+      deps: [FacebookSdkLoader], multi: true },
     AmplifyService,
     { provide: IAuthService_Token, useClass: AuthService },
     { provide: IErrorService_Token, useClass: ErrorService }

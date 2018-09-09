@@ -116,9 +116,18 @@ Parameters:
   resourceName:
     Type: String
                   
+  authProviders:
+    Type: CommaDelimitedList
+      
+  facebookAppId:
+    Type: String
+                  
   userpoolClientWriteAttributes:
     Type: CommaDelimitedList
       
+  selectedParties:
+    Type: String
+            
   unAuthRoleName:
     Type: String
             
@@ -185,10 +194,11 @@ Resources:
           Name: email
           Required: true
           Mutable: true
-
-      UsernameAttributes: [email]
-      AutoVerifiedAttributes: !Ref autoVerifiedAttributes
+        
       
+      AutoVerifiedAttributes: !Ref autoVerifiedAttributes
+      UsernameAttributes: [email]
+
       EmailVerificationMessage: !Ref emailVerificationMessage
       EmailVerificationSubject: !Ref emailVerificationSubject
             
@@ -210,7 +220,7 @@ Resources:
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
-      ClientName: cognito02d6ec4a_app_clientWeb
+      ClientName: cognitoImagelandDev_app_clientWeb
       
       ReadAttributes: !Ref userpoolClientReadAttributes
       WriteAttributes: !Ref userpoolClientWriteAttributes
@@ -343,7 +353,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: ui02d6ec4a_identitypool_02d6ec4a
+      IdentityPoolName: identityPoolImagelandDev
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient
@@ -355,6 +365,12 @@ Resources:
             - cognito-idp.${region}.amazonaws.com/${client}
             - { region: !Ref "AWS::Region",  client: !Ref UserPool}
             
+      SupportedLoginProviders: 
+        
+          
+          graph.facebook.com: '495152287625522'
+                   
+      
       AllowUnauthenticatedIdentities: !Ref allowUnauthenticatedIdentities
        
        
@@ -399,5 +415,8 @@ Outputs :
    
    
   
+  
+  FacebookWebClient:
+    Value: 495152287625522
    
   
