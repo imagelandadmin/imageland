@@ -4,8 +4,8 @@ const awsmobile =  {
     "aws_project_region": "us-east-1",
     "aws_cognito_identity_pool_id": "us-east-1:f1ea1a21-9438-4732-8244-c5bad07086f8",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_dHF2ikso7",
-    "aws_user_pools_web_client_id": "4r0u2ikhg6ej7qiu24023rqibf",
+    "aws_user_pools_id": "us-east-1_bcaqpQufs",
+    "aws_user_pools_web_client_id": "7t974vjgsp837n1h0jqodb49j1",
     "aws_content_delivery_bucket": "dev.imageland.us",
     "aws_content_delivery_bucket_region": "us-east-1",
     "aws_content_delivery_url": "https://d3pzfuw8ozmsfr.cloudfront.net"

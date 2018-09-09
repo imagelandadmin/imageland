@@ -101,7 +101,7 @@
 					"smsAuthenticationMessage": "Your ImageLand authentication code is {####}",
 					"smsVerificationMessage": "Your ImageLand verification code is {####}",
 					"emailVerificationSubject": "ImageLand email verification",
-					"emailVerificationMessage": "Welcome to ImageLand! Use this link to confirm your email, log in, and begin using the app: http://dev.imageland.us/?code={####}",
+					"emailVerificationMessage": "Welcome to ImageLand! Use this link to confirm your email, log in, and begin using the app: https://dev.imageland.us/?code={####}",
 					"defaultPasswordPolicy": true,
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",

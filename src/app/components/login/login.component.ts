@@ -30,10 +30,17 @@ export class LoginComponent extends BaseComponent {
   }
 
   ngOnInit() {
+    let self = this;
     this.loginErrorMsg = "";
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
+    });
+    this.auth.loginEvent.subscribe(isLoggedIn => {
+      log.debug(`Received login event isLoggedIn=${isLoggedIn}`);
+      if(isLoggedIn) {
+        self.dialogRef.close();
+      }
     });
   }
 

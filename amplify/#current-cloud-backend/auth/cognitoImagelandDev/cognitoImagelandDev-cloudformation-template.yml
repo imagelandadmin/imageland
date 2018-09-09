@@ -197,8 +197,8 @@ Resources:
         
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
-      
-      
+      UsernameAttributes: [email]
+
       EmailVerificationMessage: !Ref emailVerificationMessage
       EmailVerificationSubject: !Ref emailVerificationSubject
             

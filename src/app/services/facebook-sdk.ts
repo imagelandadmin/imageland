@@ -10,7 +10,7 @@ export class FacebookSdkLoader {
                     appId      : '495152287625522',
                     cookie     : true,
                     xfbml      : true,
-                    version    : 'v3.2'
+                    version    : 'v3.1'
                 });
                 FB.AppEvents.logPageView();
                 resolve(true);
