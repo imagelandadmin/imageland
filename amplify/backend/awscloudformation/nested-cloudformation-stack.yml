@@ -78,79 +78,64 @@
 				}
 			}
 		},
-		"authcognito02d6ec4a": {
+		"authcognitoImagelandDev": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/auth/cognitoImagelandDev-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
+					"identityPoolName": "identityPoolImagelandDev",
 					"allowUnauthenticatedIdentities": false,
 					"thirdPartyAuth": true,
-					"lambdaLogPolicy": "cognito02d6ec4a_lambda_log_policy",
-					"openIdLambdaRoleName": "cognito02d6ec4a_openid_lambda_role",
-					"openIdRolePolicy": "cognito02d6ec4a_openid_pass_role_policy",
-					"openIdLambdaIAMPolicy": "cognito02d6ec4a_openid_lambda_iam_policy",
-					"openIdLogPolicy": "cognito02d6ec4a_openid_lambda_log_policy",
-					"userPoolName": "ui02d6ec4a_userpool_02d6ec4a",
+					"lambdaLogPolicy": "cognitoImagelandDev_lambda_log_policy",
+					"openIdLambdaRoleName": "cognitoImagelandDev_openid_lambda_role",
+					"openIdRolePolicy": "cognitoImagelandDev_openid_pass_role_policy",
+					"openIdLambdaIAMPolicy": "cognitoImagelandDev_openid_lambda_iam_policy",
+					"openIdLogPolicy": "cognitoImagelandDev_openid_lambda_log_policy",
+					"userPoolName": "userPoolImagelandDev",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
-					"roleName": "cognito02d6ec4a_sns-role",
-					"roleExternalId": "cognito02d6ec4a_role_external_id",
-					"policyName": "cognito02d6ec4a-sns-policy",
+					"roleName": "cognitoImagelandDev_sns-role",
+					"roleExternalId": "cognitoImagelandDev_role_external_id",
+					"policyName": "cognitoImagelandDev-sns-policy",
 					"smsAuthenticationMessage": "Your ImageLand authentication code is {####}",
 					"smsVerificationMessage": "Your ImageLand verification code is {####}",
 					"emailVerificationSubject": "ImageLand email verification",
 					"emailVerificationMessage": "Welcome to ImageLand! Use this link to confirm your email, log in, and begin using the app: http://dev.imageland.us/?code={####}",
-					"defaultPasswordPolicy": false,
+					"defaultPasswordPolicy": true,
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",
 					"requiredAttributes": "family_name,given_name,email",
-					"userpoolClientName": "cognito02d6ec4a_app_client",
+					"userpoolClientName": "cognitoImagelandDev_app_client",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientReadAttributes": "email,family_name,given_name",
-					"mfaLambdaRole": "cognito02d6ec4a_totp_lambda_role",
-					"mfaLambdaLogPolicy": "cognito02d6ec4a_totp_lambda_log_policy",
-					"mfaPassRolePolicy": "cognito02d6ec4a_totp_pass_role_policy",
-					"mfaLambdaIAMPolicy": "cognito02d6ec4a_totp_lambda_iam_policy",
-					"userpoolClientLambdaRole": "cognito02d6ec4a_userpoolclient_lambda_role",
-					"userpoolClientLogPolicy": "cognito02d6ec4a_userpoolclient_lambda_log_policy",
-					"userpoolClientLambdaPolicy": "cognito02d6ec4a_userpoolclient_lambda_iam_policy",
+					"mfaLambdaRole": "cognitoImagelandDev_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognitoImagelandDev_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognitoImagelandDev_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognitoImagelandDev_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognitoImagelandDev_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognitoImagelandDev_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognitoImagelandDev_userpoolclient_lambda_iam_policy",
 					"userpoolClientSetAttributes": true,
 					"useDefault": "manual",
 					"authSelections": "identityPoolAndUserPool",
-					"resourceName": "cognito02d6ec4a",
-					"userpoolClientWriteAttributes": "email,family_name,given_name",
-					"unAuthRoleName": "ui-20180902171754-unauthRole",
-					"authRoleName": "ui-20180902171754-authRole",
-					"unAuthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-unauthRole",
-					"authRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-authRole",
+					"resourceName": "cognitoImagelandDev",
 					"authProviders": "graph.facebook.com",
 					"facebookAppId": "495152287625522",
-					"selectedParties": "{\"graph.facebook.com\":\"495152287625522\"}"
-				}
-			}
-		},
-		"storages3images": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
-				"Parameters": {
-					"bucketName": "images.imageland.us",
-					"authPolicyName": "s3_amplify_ef4270db",
-					"unauthPolicyName": "s3_amplify_ef4270db",
-					"authRoleName": "ui-20180902171754-authRole",
-					"unauthRoleName": "ui-20180902171754-unauthRole",
-					"authPermissions": "rw",
-					"unauthPermissions": ""
+					"userpoolClientWriteAttributes": "email,family_name,given_name",
+					"selectedParties": "{\"graph.facebook.com\":\"495152287625522\"}",
+					"unAuthRoleName": "imageland-20180908165204-unauthRole",
+					"authRoleName": "imageland-20180908165204-authRole",
+					"unAuthRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-unauthRole",
+					"authRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-authRole"
 				}
 			}
 		},
 		"hostingS3AndCloudFront": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
+				"TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/hosting/template.json",
 				"Parameters": {}
 			}
 		}

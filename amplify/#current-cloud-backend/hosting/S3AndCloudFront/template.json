@@ -67,7 +67,9 @@
             "DependsOn": "S3Bucket",
             "Properties": {
                 "DistributionConfig": {
-                    "Aliases": ["dev.imageland.us"],
+                    "Aliases": [
+                        "dev.imageland.us"
+                    ],
                     "ViewerCertificate": {
                         "SslSupportMethod": "sni-only",
                         "AcmCertificateArn": "arn:aws:acm:us-east-1:965717234829:certificate/23295791-910d-4f7d-adca-89245845d112"
@@ -96,9 +98,9 @@
                             "QueryString": "false"
                         },
                         "ViewerProtocolPolicy": "redirect-to-https",
-                        "DefaultTTL": "120",
-                        "MaxTTL": "300",
-                        "MinTTL": "30",
+                        "DefaultTTL": 120,
+                        "MaxTTL": 500,
+                        "MinTTL": 30,
                         "Compress": "true"
                     },
                     "DefaultRootObject": "index.html",
@@ -163,6 +165,35 @@
                 ]
             },
             "Description": "Name of S3 bucket to hold website content"
+        },
+        "CloudFrontDistributionID": {
+            "Value": {
+                "Ref": "CloudFrontDistribution"
+            }
+        },
+        "CloudFrontDomainName": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "CloudFrontDistribution",
+                    "DomainName"
+                ]
+            }
+        },
+        "CloudFrontSecureURL": {
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "https://",
+                        {
+                            "Fn::GetAtt": [
+                                "CloudFrontDistribution",
+                                "DomainName"
+                            ]
+                        }
+                    ]
+                ]
+            }
         }
     }
 }

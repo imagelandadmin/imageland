@@ -1,53 +1,36 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "ui-20180902171754-authRole",
-			"UnauthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::965717234829:role/ui-20180902171754-authRole",
+			"AuthRoleName": "imageland-20180908165204-authRole",
+			"UnauthRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-authRole",
 			"Region": "us-east-1",
-			"DeploymentBucketName": "ui-20180902171754-deployment",
-			"UnauthRoleName": "ui-20180902171754-unauthRole",
-			"StackName": "ui-20180902171754",
-			"StackId": "arn:aws:cloudformation:us-east-1:965717234829:stack/ui-20180902171754/09d1c9f0-aefe-11e8-897c-50d5cd26c2d2"
+			"DeploymentBucketName": "imageland-20180908165204-deployment",
+			"UnauthRoleName": "imageland-20180908165204-unauthRole",
+			"StackName": "imageland-20180908165204",
+			"StackId": "arn:aws:cloudformation:us-east-1:965717234829:stack/imageland-20180908165204/6cf52ab0-b3b1-11e8-9a2f-500c221b72d1"
 		}
 	},
 	"auth": {
-		"cognito02d6ec4a": {
+		"cognitoImagelandDev": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/auth/cognito02d6ec4a-cloudformation-template.yml",
-				"logicalId": "authcognito02d6ec4a"
+				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/auth/cognitoImagelandDev-cloudformation-template.yml",
+				"logicalId": "authcognitoImagelandDev"
 			},
-			"lastPushTimeStamp": "2018-09-08T15:00:26.376Z",
+			"lastPushTimeStamp": "2018-09-08T23:52:14.580Z",
 			"output": {
-				"AppClientSecret": "879em2cct658q6k7km1gsc41fg3l2pnbls1droladl4egftqphk",
-				"UserPoolId": "us-east-1_2hDCw7VaA",
-				"AppClientIDWeb": "31p84usklof82imdh4vqcsljvq",
-				"AppClientID": "5kklpo30ip3rncjkn6io5etmhs",
-				"IdentityPoolId": "us-east-1:2131e94e-04f0-4260-9a0a-7c7832ee3d1c",
-				"IdentityPoolName": "ui02d6ec4a_identitypool_02d6ec4a",
-				"UserPoolName": "ui02d6ec4a_userpool_02d6ec4a",
-				"FacebookWebClient": "495152287625522"
+				"AppClientSecret": "1ruu6ls1tselpp1n4s3t3v5kgsafdia0v3tpvjmdu7v6tti6f97f",
+				"UserPoolId": "us-east-1_dHF2ikso7",
+				"AppClientIDWeb": "4r0u2ikhg6ej7qiu24023rqibf",
+				"AppClientID": "433p123egjhgtsc961ti7tqpeu",
+				"FacebookWebClient": "495152287625522",
+				"IdentityPoolId": "us-east-1:f1ea1a21-9438-4732-8244-c5bad07086f8",
+				"IdentityPoolName": "identityPoolImagelandDev",
+				"UserPoolName": "userPoolImagelandDev"
 			},
-			"lastPushDirHash": "5oiiuXsTDTsx2EEmf08Ua8laFsw=",
-			"[object Object]": {}
-		}
-	},
-	"storage": {
-		"s3images": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
-				"logicalId": "storages3images"
-			},
-			"lastPushTimeStamp": "2018-09-08T15:00:26.374Z",
-			"output": {
-				"BucketName": "images.imageland.us",
-				"Region": "us-east-1"
-			},
-			"lastPushDirHash": "BNyScsISsa4i1sQ1aCtZ+zxDQYI="
+			"lastPushDirHash": "GXVAXk22pfCBhdNUtL5mKxOUsJs="
 		}
 	},
 	"hosting": {
@@ -55,17 +38,20 @@
 			"service": "S3AndCloudFront",
 			"providerPlugin": "awscloudformation",
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/ui-20180902171754-deployment/amplify-cfn-templates/hosting/template.json",
+				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-08T15:00:26.376Z",
+			"lastPushTimeStamp": "2018-09-08T23:52:14.584Z",
 			"output": {
+				"CloudFrontSecureURL": "https://d3pzfuw8ozmsfr.cloudfront.net",
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
 				"WebsiteURL": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com",
+				"CloudFrontDistributionID": "ECHYVHE5MR709",
 				"Region": "us-east-1",
-				"HostingBucketName": "dev.imageland.us"
+				"HostingBucketName": "dev.imageland.us",
+				"CloudFrontDomainName": "d3pzfuw8ozmsfr.cloudfront.net"
 			},
-			"lastPushDirHash": "RDlpbjTMNj35hNm2bK6Xa74YZ0k="
+			"lastPushDirHash": "oo2DIX32pVF/G/sAv1uN90EgZEI="
 		}
 	}
 }
