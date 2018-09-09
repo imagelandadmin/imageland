@@ -55,7 +55,8 @@
     "authSelections": "identityPoolAndUserPool",
     "resourceName": "cognitoImagelandDev",
     "authProviders": [
-        "graph.facebook.com"
+        "graph.facebook.com",
+        "accounts.google.com"
     ],
     "facebookAppId": "495152287625522",
     "userpoolClientWriteAttributes": [
@@ -63,9 +64,10 @@
         "family_name",
         "given_name"
     ],
-    "selectedParties": "{\"graph.facebook.com\":\"495152287625522\"}",
+    "selectedParties": "{\"graph.facebook.com\":\"495152287625522\",\"accounts.google.com\":\"960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh\"}",
     "unAuthRoleName": "imageland-20180908165204-unauthRole",
     "authRoleName": "imageland-20180908165204-authRole",
     "unAuthRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-unauthRole",
-    "authRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-authRole"
+    "authRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-authRole",
+    "googleClientId": "960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh"
 }

@@ -139,6 +139,9 @@ Parameters:
             
   authRoleArn:
     Type: String
+            
+  googleClientId:
+    Type: String
           
 Resources:
   
@@ -369,6 +372,9 @@ Resources:
         
           
           graph.facebook.com: '495152287625522'
+                  
+          
+          accounts.google.com: '960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh'
                    
       
       AllowUnauthenticatedIdentities: !Ref allowUnauthenticatedIdentities
@@ -412,6 +418,9 @@ Outputs :
   AppClientSecret:
     Value: !GetAtt UserPoolClientInputs.appSecret
   
+  
+  GoogleWebClient:
+    Value: 960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh
    
    
   

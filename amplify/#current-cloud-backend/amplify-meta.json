@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/auth/cognitoImagelandDev-cloudformation-template.yml",
 				"logicalId": "authcognitoImagelandDev"
 			},
-			"lastPushTimeStamp": "2018-09-09T03:03:29.828Z",
+			"lastPushTimeStamp": "2018-09-09T07:31:37.548Z",
 			"output": {
 				"AppClientSecret": "1lejdr5luc6e96aitko6a0b69b17f38kr2q1643t4501cdrj2dgg",
 				"UserPoolId": "us-east-1_bcaqpQufs",
@@ -28,9 +28,11 @@
 				"FacebookWebClient": "495152287625522",
 				"IdentityPoolId": "us-east-1:f1ea1a21-9438-4732-8244-c5bad07086f8",
 				"IdentityPoolName": "identityPoolImagelandDev",
-				"UserPoolName": "userPoolImagelandDev"
+				"UserPoolName": "userPoolImagelandDev",
+				"GoogleWebClient": "960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh"
 			},
-			"lastPushDirHash": "a1N/bvrL3014x7a74GPvpgtikJ8="
+			"lastPushDirHash": "xETYLWiJUQcpHD3JaotsU0cW9EU=",
+			"[object Object]": {}
 		}
 	},
 	"hosting": {
@@ -41,7 +43,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-09T03:03:29.826Z",
+			"lastPushTimeStamp": "2018-09-09T07:31:37.546Z",
 			"output": {
 				"CloudFrontSecureURL": "https://d3pzfuw8ozmsfr.cloudfront.net",
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
