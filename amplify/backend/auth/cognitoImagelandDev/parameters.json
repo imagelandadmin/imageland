@@ -69,5 +69,5 @@
     "authRoleName": "imageland-20180908165204-authRole",
     "unAuthRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-unauthRole",
     "authRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-authRole",
-    "googleClientId": "960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh"
+    "googleClientId": "960588352957-646d1sjhilj4nb57gskb916k10a1gbhn.apps.googleusercontent.com"
 }
