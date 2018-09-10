@@ -30,21 +30,14 @@ export class LoginComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    let self = this;
     this.loginErrorMsg = "";
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.auth.loginEvent.subscribe(isLoggedIn => {
-      log.debug(`Received login event isLoggedIn=${isLoggedIn}`);
-      if(isLoggedIn) {
-        self.dialogRef.close();
-      }
-    });
   }
 
-  onSubmit() {
+  async onSubmit() {
     var email = this.loginForm.controls.email.value;
     var pass = this.loginForm.controls.password.value;
     this.auth.login(email, pass)
@@ -61,6 +54,26 @@ export class LoginComponent extends BaseComponent {
     this.dialog.open(RegisterComponent, {
       disableClose: true,
       closeOnNavigation: true
+    });
+  }
+
+  signInWithGoogle() {
+    this.auth.loginGoogle()
+    .then(user => {
+      this.dialogRef.close();
+    })
+    .catch(err => {
+      this.loginErrorMsg = "Login failed.";
+    });
+  }
+
+  signInWithFB() {
+    this.auth.loginFacebook()
+    .then(user => {
+      this.dialogRef.close();
+    })
+    .catch(err => {
+      this.loginErrorMsg = "Login failed.";
     });
   }
 }

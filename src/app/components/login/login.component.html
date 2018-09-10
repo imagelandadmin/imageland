@@ -1,6 +1,6 @@
 <div class="container">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="md-dialog-container">
-        <h1 mat-dialog-title>Login</h1>
+        <h1 mat-dialog-title>Login to Imageland</h1>
         <mat-dialog-content class="md-dialog-content">
             <div class="form-group">
                 <mat-form-field>
@@ -27,8 +27,11 @@
         </mat-dialog-content>
     </form>
     <div class="social-login">
-        <div class="fb-login-button" data-max-rows="1" data-size="medium" 
-            data-button-type="login_with" data-show-faces="false" 
-            data-auto-logout-link="false" data-use-continue-as="true"></div>
+        <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
+            Login with Facebook
+        </button>
+        <button class="loginBtn loginBtn--google" (click)="signInWithGoogle()">
+            Login with Google
+        </button>
     </div>
 </div>

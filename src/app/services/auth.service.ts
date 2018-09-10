@@ -1,10 +1,12 @@
-import { Injectable, InjectionToken, Output, EventEmitter } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, Params } from '@angular/router';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Auth } from 'aws-amplify';
 import { User } from '../models/schema';
 import { Logger } from 'aws-amplify';
 import { Route } from '../app-routing.module';
+import { AuthService as SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
 
 const log = new Logger('auth');
 
@@ -12,13 +14,14 @@ export let IAuthService_Token = new InjectionToken<IAuthService>('IAuthService')
 
 export interface IAuthService extends CanActivate {
   login(email: string, pass: string): Promise<User>;
+  loginFacebook(): Promise<User>;
+  loginGoogle(): Promise<User>;
   logout(): Promise<void>;
   isLoggedIn(): boolean;
   register(email: string, pass: string, firstname: string, lastname: string): Promise<void>;
   confirmRegistration(email: string, code: string): Promise<void>;
   forgotPassword(email: string): Promise<void>;
   changePassword(email: string, oldPass: string, newPass: string): Promise<void>;
-  loginEvent: EventEmitter<boolean>;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,10 +29,12 @@ export class AuthService implements IAuthService {
 
   private static signedIn: boolean = false;
   private static verificationCode: string = "";
-  @Output() 
-  public loginEvent: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private router: Router, private amplify: AmplifyService) {
+  constructor(
+    private router: Router, 
+    private socialAuth: SocialAuthService,
+    private amplify: AmplifyService) 
+  {
     log.debug(`Constructing auth service.`);
     this.amplify.authStateChange$
       .subscribe(authState => {
@@ -39,22 +44,6 @@ export class AuthService implements IAuthService {
 
     this.router.routerState.root.queryParams.subscribe((params: Params) => {
       AuthService.verificationCode = params['code'];
-    });
-
-    let self = this;
-    /* FIXME is this check really needed, shouldn't they have to click the FB button?
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        log.debug(`Facebook status was connected when auth service was constructed.`);
-        self.loginFacebook();
-      }
-    });
-    */
-    FB.Event.subscribe('auth.authResponseChange', function(response) {
-      log.debug(`Facebook status changed to ${response.status}.`);
-      if (response.status === 'connected') {
-        self.loginFacebook();
-      }
     });
   }
 
@@ -73,33 +62,61 @@ export class AuthService implements IAuthService {
     return AuthService.signedIn;
   }
 
-  async loginFacebook() {
-    log.debug(`Logging in with Facebook.`);
-    let fbAuth = FB.getAuthResponse();
-    log.debug(`Facebook auth response: ${JSON.stringify(fbAuth)}`);
-    let self = this;
-    FB.api('/me?fields=email,id,first_name,last_name', async function(response) {
-      log.debug(`Performing federatedSignIn with response: ${JSON.stringify(response)}`);
-      Auth.verifyCurrentUserAttribute
-      await Auth.federatedSignIn('facebook', {
-        token: fbAuth.accessToken,
-        expires_at: fbAuth.expiresIn
-      }, {
-        username: response.id,
-        email: response.email,
-        given_name: response.first_name,
-        family_name: response.last_name
-      }).catch(err => {
-        log.error(`While attempting to facebook login ${response.email}: \n${JSON.stringify(err)}`);
-        throw err;
-      });
+  async loginFacebook(): Promise<User> {
+    var user = await this.loginSocial(FacebookLoginProvider.PROVIDER_ID);
+    user.email = await this.obtainFacebookEmail(user);
+    return await this.federatedCognitoLogin(user, FB.getAuthResponse().expiresIn);
+  }
 
-      let currentUser = await Auth.currentAuthenticatedUser();
-      log.debug(`CurrentAuthenticatedUser=${JSON.stringify(currentUser)}`);
-      AuthService.signedIn = (currentUser != undefined);
-      log.debug(`Emitting event for FederatedSignIn result=${AuthService.signedIn}`);
-      self.loginEvent.emit(AuthService.signedIn);
+  async loginGoogle(): Promise<User> {
+    let user = await this.loginSocial(GoogleLoginProvider.PROVIDER_ID);
+    let googleUser = (<any>window).gapi.auth2.getAuthInstance().currentUser.get();
+    log.debug(`Google user is ${JSON.stringify(googleUser)}`);
+    let expiry = googleUser.getAuthResponse().expires_in;
+    return await this.federatedCognitoLogin(user, expiry);
+  }
+
+  private async loginSocial(provider: string): Promise<SocialUser> {
+    log.debug(`Logging in with ${provider}.`);
+    let socialUser = await this.socialAuth.signIn(provider)
+    .catch(err => {
+      log.error(`While attempting to login with ${provider}: \n${JSON.stringify(err)}`);
+      throw err;
     });
+    
+    log.debug(`Login social response User=${JSON.stringify(socialUser)}`);
+
+    return socialUser;
+  }
+
+  private async obtainFacebookEmail(socialUser: SocialUser): Promise<string> {
+    //facebook doesn't return email address with the login request, so
+    //we have to make a separate query to fetch it.
+    return new Promise<string>((resolve, reject) => {
+      FB.api('/me?fields=email,id,first_name,last_name', async function(response) {
+        log.debug(`Resolved facebook graph data. Response=${JSON.stringify(response)}`);
+        resolve(response.email);
+      });
+    });
+  }
+
+  private async federatedCognitoLogin(socialUser: SocialUser, tokenExpiration: number):  Promise<User> {
+    log.debug(`Performing federated login for ${socialUser.email} with expiration ${tokenExpiration}`);
+    let user = await Auth.federatedSignIn('facebook', {
+      token: socialUser.authToken,
+      expires_at: tokenExpiration
+    }, {
+      username: socialUser.id,
+      email: socialUser.email,
+      given_name: socialUser.firstName,
+      family_name: socialUser.lastName
+    }).catch(err => {
+      log.error(`While attempting to federated login ${socialUser.email}: \n${JSON.stringify(err)}`);
+      throw err;
+    });
+
+    await this.loginCompletion();
+    return user;
   }
 
   async login(email: string, pass: string): Promise<User> {
@@ -116,16 +133,23 @@ export class AuthService implements IAuthService {
         throw err;
       });
 
+    await this.loginCompletion();
+    return user;
+  }
+
+  private async loginCompletion() {
     let currentUser = await Auth.currentAuthenticatedUser();
     log.debug(`CurrentAuthenticatedUser=${JSON.stringify(currentUser)}`);
     AuthService.signedIn = (currentUser != undefined);
-    log.debug(`Emitting event for Login result=${AuthService.signedIn}`);
-    this.loginEvent.emit(AuthService.signedIn);
-    return user;
+    if(!currentUser) { 
+      throw Error(`No authenticated user available after login.`);
+    }
   }
 
   async logout(): Promise<void> {
     log.debug(`Logging out.`);
+    AuthService.signedIn = false;
+    this.socialAuth.signOut();
     await Auth.signOut()
       .catch(err => {
         log.error(`While attempting to logout: \n${JSON.stringify(err)}`);

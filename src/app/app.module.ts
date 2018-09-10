@@ -8,6 +8,7 @@ import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule
 import { AmplifyAngularModule } from 'aws-amplify-angular';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 
 //components
 import { AppComponent } from './components/app/app.component';
@@ -28,6 +29,7 @@ import { AmplifyService } from 'aws-amplify-angular';
 import { IAuthService_Token, AuthService } from './services/auth.service';
 import { IErrorService_Token, ErrorService } from './services/error.service';
 import { FacebookSdkLoader } from './services/facebook-sdk';
+import { SocialConfigProvider } from './services/social-config.provider';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { FacebookSdkLoader } from './services/facebook-sdk';
     MatFormFieldModule,
     MatInputModule,
     AmplifyAngularModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocialLoginModule
   ],
   providers: [
     //services
@@ -69,6 +72,8 @@ import { FacebookSdkLoader } from './services/facebook-sdk';
       useFactory: (loader: FacebookSdkLoader) => () => loader.loadFacebookSdk(), 
       deps: [FacebookSdkLoader], multi: true },
     AmplifyService,
+    SocialConfigProvider,
+    { provide: AuthServiceConfig, useClass: SocialConfigProvider },
     { provide: IAuthService_Token, useClass: AuthService },
     { provide: IErrorService_Token, useClass: ErrorService }
   ],
