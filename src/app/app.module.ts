@@ -28,7 +28,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { AmplifyService } from 'aws-amplify-angular';
 import { IAuthService_Token, AuthService } from './services/auth.service';
 import { IErrorService_Token, ErrorService } from './services/error.service';
-import { FacebookSdkLoader } from './services/facebook-sdk';
 import { SocialConfigProvider } from './services/social-config.provider';
 
 @NgModule({
@@ -65,12 +64,6 @@ import { SocialConfigProvider } from './services/social-config.provider';
   ],
   providers: [
     //services
-    // Note: We need the APP_INITIALIZER below to ensure the facebook sdk has 
-    // finished downloading before the rest of angular bootstraps... ugh
-    FacebookSdkLoader, 
-    { provide: APP_INITIALIZER, 
-      useFactory: (loader: FacebookSdkLoader) => () => loader.loadFacebookSdk(), 
-      deps: [FacebookSdkLoader], multi: true },
     AmplifyService,
     SocialConfigProvider,
     { provide: AuthServiceConfig, useClass: SocialConfigProvider },

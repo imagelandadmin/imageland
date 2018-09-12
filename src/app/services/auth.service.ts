@@ -64,7 +64,7 @@ export class AuthService implements IAuthService {
 
   async loginFacebook(): Promise<User> {
     var user = await this.loginSocial(FacebookLoginProvider.PROVIDER_ID);
-    user.email = await this.obtainFacebookEmail(user);
+    log.debug(`Facebook auth response=${JSON.stringify(FB.getAuthResponse())}`);
     return await this.federatedCognitoLogin(user, FB.getAuthResponse().expiresIn);
   }
 
@@ -72,6 +72,7 @@ export class AuthService implements IAuthService {
     let user = await this.loginSocial(GoogleLoginProvider.PROVIDER_ID);
     let googleUser = (<any>window).gapi.auth2.getAuthInstance().currentUser.get();
     log.debug(`Google user is ${JSON.stringify(googleUser)}`);
+    log.debug(`Google auth response=${JSON.stringify(googleUser.getAuthResponse())}`);
     let expiry = googleUser.getAuthResponse().expires_in;
     return await this.federatedCognitoLogin(user, expiry);
   }
@@ -89,21 +90,11 @@ export class AuthService implements IAuthService {
     return socialUser;
   }
 
-  private async obtainFacebookEmail(socialUser: SocialUser): Promise<string> {
-    //facebook doesn't return email address with the login request, so
-    //we have to make a separate query to fetch it.
-    return new Promise<string>((resolve, reject) => {
-      FB.api('/me?fields=email,id,first_name,last_name', async function(response) {
-        log.debug(`Resolved facebook graph data. Response=${JSON.stringify(response)}`);
-        resolve(response.email);
-      });
-    });
-  }
-
   private async federatedCognitoLogin(socialUser: SocialUser, tokenExpiration: number):  Promise<User> {
     log.debug(`Performing federated login for ${socialUser.email} with expiration ${tokenExpiration}`);
-    let user = await Auth.federatedSignIn('facebook', {
+    let user = await Auth.federatedSignIn(socialUser.provider.toLowerCase(), {
       token: socialUser.authToken,
+      identity_id: socialUser.idToken,
       expires_at: tokenExpiration
     }, {
       username: socialUser.id,
