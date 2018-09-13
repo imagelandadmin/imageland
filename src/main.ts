@@ -11,11 +11,11 @@ const oauth = {
   // Domain name
   domain : 'imageland.auth.us-east-1.amazoncognito.com', 
   // Authorized scopes
-  scope : ['email', 'profile', 'openid'], 
+  scope : ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'], 
   // Callback URL
-  redirectSignIn : 'https://dev.imageland.us/login', 
+  redirectSignIn : 'https://dev.imageland.us', 
   // Sign out URL
-  redirectSignOut : 'https://dev.imageland.us/logout',
+  redirectSignOut : 'https://dev.imageland.us',
   // 'code' for Authorization code grant, 
   // 'token' for Implicit grant
   responseType: 'code',

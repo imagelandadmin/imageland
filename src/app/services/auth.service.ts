@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, Params } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Auth } from 'aws-amplify';
 import { Logger } from 'aws-amplify';
@@ -28,12 +28,8 @@ export class AuthService implements IAuthService {
     this.amplify.authStateChange$
       .subscribe(authState => {
         log.debug(`Auth state changed to ${authState.state}`);
-        AuthService.signedIn = (authState.state === "signedIn");
-    });
-
-    this.router.routerState.root.queryParams.subscribe((params: Params) => {
-
-    });
+        AuthService.signedIn = (authState.state === "signedIn") || (authState.state === "cognitoHostedUI");
+      });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -64,17 +60,23 @@ export class AuthService implements IAuthService {
   }
 
   async login(): Promise<void> {
+    log.debug(`Referred from: ${document.referrer}`);
+    let url = this.oAuthRedirectUrl();
+    if (url != document.referrer) {
+      log.debug(`Redirecting to ${url}`);
+      window.location.assign(url);
+    }
+  }
+
+  private oAuthRedirectUrl(): string {
     const config: any = Auth.configure({});
     const { 
         domain,  
         redirectSignIn, 
         redirectSignOut,
         responseType } = config.oauth;
-    
     const clientId = config.userPoolWebClientId;
-    const url = 'https://' + domain + '/login?redirect_uri=' + redirectSignIn + 
-                  '&response_type=' + responseType + '&client_id=' + clientId;
-    log.debug(`Redirecting to ${url}`);
-    window.location.assign(url);
+    return 'https://' + domain + '/login?redirect_uri=' + redirectSignIn + 
+              '&response_type=' + responseType + '&client_id=' + clientId;
   }
 }
