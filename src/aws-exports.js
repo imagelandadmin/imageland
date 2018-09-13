@@ -2,15 +2,13 @@
 
 const awsmobile =  {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:2131e94e-04f0-4260-9a0a-7c7832ee3d1c",
+    "aws_cognito_identity_pool_id": "us-east-1:f1ea1a21-9438-4732-8244-c5bad07086f8",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_MdVIQVx3z",
-    "aws_user_pools_web_client_id": "43ofepfk5g5ik05f0ec1oi0u6n",
-    "aws_user_files_s3_bucket": "images.imageland.us",
-    "aws_user_files_s3_bucket_region": "us-east-1",
+    "aws_user_pools_id": "us-east-1_bcaqpQufs",
+    "aws_user_pools_web_client_id": "7t974vjgsp837n1h0jqodb49j1",
     "aws_content_delivery_bucket": "dev.imageland.us",
     "aws_content_delivery_bucket_region": "us-east-1",
-    "aws_content_delivery_url": "http://dev.imageland.us.s3-website-us-east-1.amazonaws.com"
+    "aws_content_delivery_url": "https://d3pzfuw8ozmsfr.cloudfront.net"
 };
 
 

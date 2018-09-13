@@ -20,14 +20,11 @@ import { UploadComponent } from './components/upload/upload.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 
 //services
 import { AmplifyService } from 'aws-amplify-angular';
 import { IAuthService_Token, AuthService } from './services/auth.service';
 import { IErrorService_Token, ErrorService } from './services/error.service';
-
 
 @NgModule({
   declarations: [
@@ -41,9 +38,7 @@ import { IErrorService_Token, ErrorService } from './services/error.service';
     UploadComponent,
     CartComponent,
     SettingsComponent,
-    ProfileComponent,
-    LoginComponent,
-    RegisterComponent
+    ProfileComponent
   ],
   imports: [
     //modules
@@ -67,7 +62,7 @@ import { IErrorService_Token, ErrorService } from './services/error.service';
     { provide: IErrorService_Token, useClass: ErrorService }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: []
 })
 export class AppModule { 
 

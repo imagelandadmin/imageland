@@ -1,0 +1,73 @@
+{
+    "identityPoolName": "identityPoolImagelandDev",
+    "allowUnauthenticatedIdentities": false,
+    "thirdPartyAuth": true,
+    "lambdaLogPolicy": "cognitoImagelandDev_lambda_log_policy",
+    "openIdLambdaRoleName": "cognitoImagelandDev_openid_lambda_role",
+    "openIdRolePolicy": "cognitoImagelandDev_openid_pass_role_policy",
+    "openIdLambdaIAMPolicy": "cognitoImagelandDev_openid_lambda_iam_policy",
+    "openIdLogPolicy": "cognitoImagelandDev_openid_lambda_log_policy",
+    "userPoolName": "userPoolImagelandDev",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "roleName": "cognitoImagelandDev_sns-role",
+    "roleExternalId": "cognitoImagelandDev_role_external_id",
+    "policyName": "cognitoImagelandDev-sns-policy",
+    "smsAuthenticationMessage": "Your ImageLand authentication code is {####}",
+    "smsVerificationMessage": "Your ImageLand verification code is {####}",
+    "emailVerificationSubject": "ImageLand email verification code",
+    "emailVerificationMessage": "Welcome to ImageLand! Use this code to confirm your email address: {####}",
+    "defaultPasswordPolicy": true,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+        "Requires Lowercase",
+        "Requires Uppercase",
+        "Requires Numbers",
+        "Requires Symbols"
+    ],
+    "requiredAttributes": [
+        "family_name",
+        "given_name",
+        "email"
+    ],
+    "userpoolClientName": "cognitoImagelandDev_app_client",
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientReadAttributes": [
+        "email",
+        "family_name",
+        "given_name"
+    ],
+    "mfaLambdaRole": "cognitoImagelandDev_totp_lambda_role",
+    "mfaLambdaLogPolicy": "cognitoImagelandDev_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "cognitoImagelandDev_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "cognitoImagelandDev_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "cognitoImagelandDev_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "cognitoImagelandDev_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "cognitoImagelandDev_userpoolclient_lambda_iam_policy",
+    "userpoolClientSetAttributes": true,
+    "useDefault": "manual",
+    "authSelections": "identityPoolAndUserPool",
+    "resourceName": "cognitoImagelandDev",
+    "authProviders": [
+        "graph.facebook.com",
+        "accounts.google.com"
+    ],
+    "facebookAppId": "495152287625522",
+    "userpoolClientWriteAttributes": [
+        "email",
+        "family_name",
+        "given_name"
+    ],
+    "selectedParties": "{\"graph.facebook.com\":\"495152287625522\",\"accounts.google.com\":\"960588352957-3cu14vrv4599cohj3rsqg3ccnd6988oh\"}",
+    "unAuthRoleName": "imageland-20180908165204-unauthRole",
+    "authRoleName": "imageland-20180908165204-authRole",
+    "unAuthRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-unauthRole",
+    "authRoleArn": "arn:aws:iam::965717234829:role/imageland-20180908165204-authRole",
+    "googleClientId": "960588352957-646d1sjhilj4nb57gskb916k10a1gbhn.apps.googleusercontent.com"
+}

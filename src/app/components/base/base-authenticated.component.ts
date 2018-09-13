@@ -1,8 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
+import { Inject } from '@angular/core';
 import { IAuthService_Token, IAuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 import { BaseComponent } from './base.component';
 
 /**
@@ -10,20 +7,14 @@ import { BaseComponent } from './base.component';
  */
 export abstract class BaseAuthenticatedComponent extends BaseComponent {
 
-    private static dialogOpen = false;
-
-    constructor(
-        @Inject(IAuthService_Token) private auth: IAuthService,
-        private router: Router,
-        private dialog: MatDialog) 
-    {
+    constructor(@Inject(IAuthService_Token) private auth: IAuthService) {
         super();
     }
 
     async ngOnInit() {
         super.ngOnInit();
-        if(this.needsAuth() && !BaseAuthenticatedComponent.dialogOpen) {
-            this.showLoginDialog();
+        if(this.needsAuth()) {
+            await this.auth.login();
         }
     }
 
@@ -37,16 +28,5 @@ export abstract class BaseAuthenticatedComponent extends BaseComponent {
      */
     protected requiresAuth(): boolean {
         return true;
-    }
-
-    private showLoginDialog() {
-        BaseAuthenticatedComponent.dialogOpen = true;
-        this.log.info("Showing login dialog.");
-        this.dialog.open(LoginComponent, {
-            disableClose: true,
-            closeOnNavigation: true
-        }).afterClosed().subscribe(() => {
-            BaseAuthenticatedComponent.dialogOpen = false;
-        });
     }
 }

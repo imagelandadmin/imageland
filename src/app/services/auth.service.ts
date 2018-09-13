@@ -1,8 +1,7 @@
 import { Injectable, InjectionToken } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, Params } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Auth } from 'aws-amplify';
-import { User } from '../models/schema';
 import { Logger } from 'aws-amplify';
 import { Route } from '../app-routing.module';
 
@@ -11,31 +10,26 @@ const log = new Logger('auth');
 export let IAuthService_Token = new InjectionToken<IAuthService>('IAuthService');
 
 export interface IAuthService extends CanActivate {
-  login(email: string, pass: string): Promise<User>;
+  login(): Promise<void>;
   logout(): Promise<void>;
   isLoggedIn(): boolean;
-  register(email: string, pass: string, firstname: string, lastname: string): Promise<void>;
-  confirmRegistration(email: string, code: string): Promise<void>;
-  forgotPassword(email: string): Promise<void>;
-  changePassword(email: string, oldPass: string, newPass: string): Promise<void>;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements IAuthService {
 
   private static signedIn: boolean = false;
-  private static verificationCode: string = "";
 
-  constructor(private router: Router, private amplify: AmplifyService) {
+  constructor(
+    private router: Router, 
+    private amplify: AmplifyService) 
+  {
+    log.debug(`Constructing auth service.`);
     this.amplify.authStateChange$
       .subscribe(authState => {
         log.debug(`Auth state changed to ${authState.state}`);
-        AuthService.signedIn = authState.state == "signedIn";
-    });
-
-    this.router.routerState.root.queryParams.subscribe((params: Params) => {
-      AuthService.verificationCode = params['code'];
-    });
+        AuthService.signedIn = (authState.state === "signedIn") || (authState.state === "cognitoHostedUI");
+      });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -45,6 +39,7 @@ export class AuthService implements IAuthService {
     }
 
     let canActivate = AuthService.signedIn;
+    log.debug(`AuthGuard canActivate=${canActivate} for URL=${state.url}`);
     return canActivate;
   }
 
@@ -52,23 +47,9 @@ export class AuthService implements IAuthService {
     return AuthService.signedIn;
   }
 
-  async login(email: string, pass: string): Promise<User> {
-    if(AuthService.verificationCode) {
-      await this.confirmRegistration(email, AuthService.verificationCode);
-      AuthService.verificationCode = "";
-    }
-
-    let user = await Auth.signIn(email, pass)
-      .catch(err => {
-        log.error(`While attempting to login ${email}: \n${JSON.stringify(err)}`);
-        throw err;
-      });
-
-    this.router.navigate([Route.HOME]);
-    return user;
-  }
-
   async logout(): Promise<void> {
+    log.debug(`Logging out.`);
+    AuthService.signedIn = false;
     await Auth.signOut()
       .catch(err => {
         log.error(`While attempting to logout: \n${JSON.stringify(err)}`);
@@ -78,46 +59,24 @@ export class AuthService implements IAuthService {
     this.router.navigate([Route.HOME]);
   }
 
-  async register(email: string, pass: string, firstname: string, lastname: string): Promise<any> {
-    await Auth.signUp({
-      username: email,
-      password: pass,
-      attributes: {
-        email: email,
-        given_name: firstname,
-        family_name: lastname
-      },
-      validationData: []
-    }).catch(err => {
-      log.error(`While registering user ${email}: \n${JSON.stringify(err)}`);
-      throw err;
-    });
-
-    this.router.navigate([Route.HOME]);
+  async login(): Promise<void> {
+    log.debug(`Referred from: ${document.referrer}`);
+    let url = this.oAuthRedirectUrl();
+    if (url != document.referrer) {
+      log.debug(`Redirecting to ${url}`);
+      window.location.assign(url);
+    }
   }
 
-  async confirmRegistration(email: string, code: string): Promise<void> {
-    log.info(`Confirming registration code=${code}`);
-    return await Auth.confirmSignUp(email, code, { forceAliasCreation: true })
-      .catch(err => {
-        log.error(`While confirming user registration for ${email}: \n${JSON.stringify(err)}`);
-        throw err;
-      });
-  }
-
-  async forgotPassword(email: string): Promise<void> {
-    await Auth.forgotPassword(email)
-      .catch(err => {
-        log.error(`While resetting password for ${email}: \n${JSON.stringify(err)}`);
-        throw err;
-      });
-  }
-
-  async changePassword(email: string, oldPass: string, newPass: string): Promise<void> {
-    await Auth.changePassword(email, oldPass, newPass)
-      .catch(err => {
-        log.error(`While changing password for ${email}: \n${JSON.stringify(err)}`);
-        throw err;
-      });
+  private oAuthRedirectUrl(): string {
+    const config: any = Auth.configure({});
+    const { 
+        domain,  
+        redirectSignIn, 
+        redirectSignOut,
+        responseType } = config.oauth;
+    const clientId = config.userPoolWebClientId;
+    return 'https://' + domain + '/login?redirect_uri=' + redirectSignIn + 
+              '&response_type=' + responseType + '&client_id=' + clientId;
   }
 }
