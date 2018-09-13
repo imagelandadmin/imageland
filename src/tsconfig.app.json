@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": ["node", "facebook-js-sdk"]
+    "types": ["node"]
   },
   "exclude": [
     "test.ts",

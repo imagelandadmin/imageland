@@ -7,7 +7,6 @@ import { FolderComponent } from './components/folder/folder.component';
 import { UploadComponent } from './components/upload/upload.component'; 
 import { SettingsComponent } from './components/settings/settings.component'; 
 import { ProfileComponent } from './components/profile/profile.component'; 
-import { RegisterComponent } from './components/register/register.component'; 
 import { AuthService } from './services/auth.service';
 
 export const enum Route {
@@ -26,9 +25,6 @@ const routes: Routes = [
   {
     path: Route.HOME.substring(1),
     component: HomeComponent
-  },{
-    path: Route.REGISTER.substring(1),
-    component: RegisterComponent
   },{
     path: Route.SEARCH.substring(1),
     component: SearchComponent,

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Logger } from 'aws-amplify';
 
 /**

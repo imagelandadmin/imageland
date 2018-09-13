@@ -1,14 +1,13 @@
 //modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AmplifyAngularModule } from 'aws-amplify-angular';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 
 //components
 import { AppComponent } from './components/app/app.component';
@@ -21,14 +20,11 @@ import { UploadComponent } from './components/upload/upload.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 
 //services
 import { AmplifyService } from 'aws-amplify-angular';
 import { IAuthService_Token, AuthService } from './services/auth.service';
 import { IErrorService_Token, ErrorService } from './services/error.service';
-import { SocialConfigProvider } from './services/social-config.provider';
 
 @NgModule({
   declarations: [
@@ -42,9 +38,7 @@ import { SocialConfigProvider } from './services/social-config.provider';
     UploadComponent,
     CartComponent,
     SettingsComponent,
-    ProfileComponent,
-    LoginComponent,
-    RegisterComponent
+    ProfileComponent
   ],
   imports: [
     //modules
@@ -59,19 +53,16 @@ import { SocialConfigProvider } from './services/social-config.provider';
     MatFormFieldModule,
     MatInputModule,
     AmplifyAngularModule,
-    ReactiveFormsModule,
-    SocialLoginModule
+    ReactiveFormsModule
   ],
   providers: [
     //services
     AmplifyService,
-    SocialConfigProvider,
-    { provide: AuthServiceConfig, useClass: SocialConfigProvider },
     { provide: IAuthService_Token, useClass: AuthService },
     { provide: IErrorService_Token, useClass: ErrorService }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: []
 })
 export class AppModule { 
 
