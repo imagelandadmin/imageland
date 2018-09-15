@@ -1,6 +1,11 @@
-type Instrument @model {
+enum InstrumentTypeEnum {
+    mortgage
+    lease
+}
+
+type Instrument @model @searchable {
   id: ID!
-  type: String!
+  type: InstrumentTypeEnum!
   grantor: String!
   grantee: String!
   effective: String!
@@ -11,7 +16,7 @@ type Instrument @model {
   images: [Image] @connection(name: "Images")
 }
 
-type Image @model {
+type Image @model @searchable {
   id: ID!
   book: Int!
   page: Int!

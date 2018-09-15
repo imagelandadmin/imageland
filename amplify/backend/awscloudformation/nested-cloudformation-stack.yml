@@ -139,6 +139,42 @@
 				"TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/hosting/template.json",
 				"Parameters": {}
 			}
+		},
+		"apiimageland": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"Parameters": {
+					"AppSyncApiName": "imageland",
+					"MutationCreateImageResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.createImage.response.1537037784181",
+					"ImageInstrumentResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Image.instrument.response.1537037784181",
+					"ElasticSearchStreamingLambdaCodeS3Key": "amplify-appsync-files/python_streaming_function.zip",
+					"ElasticSearchStreamingLambdaCodeS3Bucket": "imageland-20180908165204-deployment",
+					"InstrumentImagesResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Instrument.images.response.1537037784181",
+					"MutationCreateInstrumentResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.createInstrument.response.1537037784181",
+					"ImageInstrumentRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Image.instrument.request.1537037784181",
+					"MutationCreateImageRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.createImage.request.1537037784181",
+					"MutationUpdateImageResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.updateImage.response.1537037784181",
+					"InstrumentImagesRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Instrument.images.request.1537037784181",
+					"MutationDeleteInstrumentResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.deleteInstrument.response.1537037784181",
+					"MutationDeleteInstrumentRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.deleteInstrument.request.1537037784181",
+					"MutationUpdateImageRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.updateImage.request.1537037784181",
+					"QueryListImagesResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.listImages.response.1537037784181",
+					"QueryGetInstrumentResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.getInstrument.response.1537037784181",
+					"MutationDeleteImageResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.deleteImage.response.1537037784181",
+					"MutationUpdateInstrumentResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.updateInstrument.response.1537037784181",
+					"QueryListImagesRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.listImages.request.1537037784181",
+					"MutationCreateInstrumentRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.createInstrument.request.1537037784181",
+					"QueryGetImageResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.getImage.response.1537037784181",
+					"MutationUpdateInstrumentRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.updateInstrument.request.1537037784181",
+					"MutationDeleteImageRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Mutation.deleteImage.request.1537037784181",
+					"QueryGetImageRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.getImage.request.1537037784181",
+					"QueryGetInstrumentRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.getInstrument.request.1537037784181",
+					"QueryListInstrumentsResponse": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.listInstruments.response.1537037784181",
+					"schemaGraphql": "s3://imageland-20180908165204-deployment/amplify-appsync-files/schema.graphql.1537037784181",
+					"QueryListInstrumentsRequest": "s3://imageland-20180908165204-deployment/amplify-appsync-files/Query.listInstruments.request.1537037784181"
+				}
+			}
 		}
 	},
 	"Outputs": {

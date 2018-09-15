@@ -1,0 +1,322 @@
+type Mutation {
+  createInstrument(input: CreateInstrumentInput!): Instrument
+  updateInstrument(input: UpdateInstrumentInput!): Instrument
+  deleteInstrument(input: DeleteInstrumentInput!): Instrument
+  createImage(input: CreateImageInput!): Image
+  updateImage(input: UpdateImageInput!): Image
+  deleteImage(input: DeleteImageInput!): Image
+}
+
+type Query {
+  getInstrument(id: ID!): Instrument
+  listInstruments(filter: ModelInstrumentFilterInput, limit: Int, nextToken: String): ModelInstrumentConnection
+  getImage(id: ID!): Image
+  listImages(filter: ModelImageFilterInput, limit: Int, nextToken: String): ModelImageConnection
+  searchInstruments(filter: SearchableInstrumentFilterInput, sort: SearchableInstrumentSortInput, limit: Int, nextToken: Int): SearchableInstrumentConnection
+  searchImages(filter: SearchableImageFilterInput, sort: SearchableImageSortInput, limit: Int, nextToken: Int): SearchableImageConnection
+}
+
+type Subscription {
+  onCreateInstrument: Instrument @aws_subscribe(mutations: ["createInstrument"])
+  onUpdateInstrument: Instrument @aws_subscribe(mutations: ["updateInstrument"])
+  onDeleteInstrument: Instrument @aws_subscribe(mutations: ["deleteInstrument"])
+  onCreateImage: Image @aws_subscribe(mutations: ["createImage"])
+  onUpdateImage: Image @aws_subscribe(mutations: ["updateImage"])
+  onDeleteImage: Image @aws_subscribe(mutations: ["deleteImage"])
+}
+
+type Instrument {
+  id: ID!
+  type: InstrumentTypeEnum!
+  grantor: String!
+  grantee: String!
+  effective: String!
+  township: String!
+  range: String!
+  county: String!
+  state: String!
+  images(filter: ModelImageFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelImageConnection
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelInstrumentConnection {
+  items: [Instrument]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelInstrumentFilterInput {
+  id: ModelIDFilterInput
+  grantor: ModelStringFilterInput
+  grantee: ModelStringFilterInput
+  effective: ModelStringFilterInput
+  township: ModelStringFilterInput
+  range: ModelStringFilterInput
+  county: ModelStringFilterInput
+  state: ModelStringFilterInput
+  and: [ModelInstrumentFilterInput]
+  or: [ModelInstrumentFilterInput]
+  not: ModelInstrumentFilterInput
+}
+
+input CreateInstrumentInput {
+  grantor: String!
+  grantee: String!
+  effective: String!
+  township: String!
+  range: String!
+  county: String!
+  state: String!
+}
+
+input UpdateInstrumentInput {
+  id: ID!
+  grantor: String
+  grantee: String
+  effective: String
+  township: String
+  range: String
+  county: String
+  state: String
+}
+
+input DeleteInstrumentInput {
+  id: ID
+}
+
+type Image {
+  id: ID!
+  book: Int!
+  page: Int!
+  image: S3Object!
+  ocr: S3Object!
+  instrument: Instrument
+}
+
+type ModelImageConnection {
+  items: [Image]
+  nextToken: String
+}
+
+input ModelImageFilterInput {
+  id: ModelIDFilterInput
+  book: ModelIntFilterInput
+  page: ModelIntFilterInput
+  and: [ModelImageFilterInput]
+  or: [ModelImageFilterInput]
+  not: ModelImageFilterInput
+}
+
+input CreateImageInput {
+  book: Int!
+  page: Int!
+  imageInstrumentId: ID
+}
+
+input UpdateImageInput {
+  id: ID!
+  book: Int
+  page: Int
+  imageInstrumentId: ID
+}
+
+input DeleteImageInput {
+  id: ID
+}
+
+input SearchableStringFilterInput {
+  ne: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+}
+
+input SearchableIDFilterInput {
+  ne: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+}
+
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input SearchableInstrumentFilterInput {
+  id: SearchableIDFilterInput
+  grantor: SearchableStringFilterInput
+  grantee: SearchableStringFilterInput
+  effective: SearchableStringFilterInput
+  township: SearchableStringFilterInput
+  range: SearchableStringFilterInput
+  county: SearchableStringFilterInput
+  state: SearchableStringFilterInput
+  and: [SearchableInstrumentFilterInput]
+  or: [SearchableInstrumentFilterInput]
+  not: SearchableInstrumentFilterInput
+}
+
+enum SearchableSortDirection {
+  asc
+  desc
+}
+
+enum SearchableInstrumentSortableFields {
+  id
+  grantor
+  grantee
+  effective
+  township
+  range
+  county
+  state
+}
+
+input SearchableInstrumentSortInput {
+  field: SearchableInstrumentSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchableInstrumentConnection {
+  items: [Instrument]
+  nextToken: String
+}
+
+input SearchableImageFilterInput {
+  id: SearchableIDFilterInput
+  book: SearchableIntFilterInput
+  page: SearchableIntFilterInput
+  and: [SearchableImageFilterInput]
+  or: [SearchableImageFilterInput]
+  not: SearchableImageFilterInput
+}
+
+enum SearchableImageSortableFields {
+  id
+  book
+  page
+}
+
+input SearchableImageSortInput {
+  field: SearchableImageSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchableImageConnection {
+  items: [Image]
+  nextToken: String
+}
+
+enum InstrumentTypeEnum {
+  mortgage
+  lease
+}
+
+enum Visibility {
+  public
+  private
+}
+
+input S3ObjectInput {
+  bucket: String!
+  region: String!
+  localUri: String
+  visibility: Visibility
+  key: String
+  mimeType: String
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}

@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/auth/cognitoImagelandDev-cloudformation-template.yml",
 				"logicalId": "authcognitoImagelandDev"
 			},
-			"lastPushTimeStamp": "2018-09-12T23:06:23.089Z",
+			"lastPushTimeStamp": "2018-09-15T19:07:56.455Z",
 			"output": {
 				"AppClientSecret": "1lejdr5luc6e96aitko6a0b69b17f38kr2q1643t4501cdrj2dgg",
 				"UserPoolId": "us-east-1_bcaqpQufs",
@@ -43,7 +43,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-09-12T23:06:23.087Z",
+			"lastPushTimeStamp": "2018-09-15T19:07:56.456Z",
 			"output": {
 				"CloudFrontSecureURL": "https://d3pzfuw8ozmsfr.cloudfront.net",
 				"S3BucketSecureURL": "https://dev.imageland.us.s3.amazonaws.com",
@@ -54,6 +54,27 @@
 				"CloudFrontDomainName": "d3pzfuw8ozmsfr.cloudfront.net"
 			},
 			"lastPushDirHash": "oo2DIX32pVF/G/sAv1uN90EgZEI="
+		}
+	},
+	"api": {
+		"imageland": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS",
+				"GraphQLAPIIdOutput": "37hkilsd6jfxpc3kakfs5ctfre",
+				"GraphQLAPIEndpointOutput": "https://tfz7s43vgnfi5ouqbitmlht7uq.appsync-api.us-east-1.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-mof5rtxmt5cvxk3wuogzq7fsxy",
+				"AuthCognitoUserPoolIdOutput": "us-east-1_1zqLDMYi1",
+				"AuthCognitoUserPoolNativeClientId": "1jcgus8q97f15iru07mgqb9hg1",
+				"AuthCognitoUserPoolJSClientId": "7g2ebo2aofukg2r8shbjntasv1"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/imageland-20180908165204-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiimageland"
+			},
+			"lastPushTimeStamp": "2018-09-15T19:07:56.459Z",
+			"lastPushDirHash": "qhupoT1VIsiUL42JkyJe6FjLhac="
 		}
 	}
 }
