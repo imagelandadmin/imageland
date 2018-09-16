@@ -40,17 +40,19 @@ def draw_boxes(image, bounds, color):
 
 def get_document_bounds(response, feature):
     """Returns document bounds given an image."""
+    print("Drawing bounds on feature {0}".format(feature))
     document = response.full_text_annotation
     bounds = []
-    full_text = []
+    words = []
     for page in document.pages:
         for block in page.blocks:
             for paragraph in block.paragraphs:
+                words.append('\n\n')
                 for word in paragraph.words:
+                    words.append(''.join([symbol.text for symbol in word.symbols]))
                     for symbol in word.symbols:
                         if (feature == FeatureType.SYMBOL):
                             bounds.append(symbol.bounding_box)
-                            full_text.append(symbol.text)
                     if (feature == FeatureType.WORD):
                         bounds.append(word.bounding_box) 
                 if (feature == FeatureType.PARA):
@@ -60,18 +62,20 @@ def get_document_bounds(response, feature):
         if (feature == FeatureType.PAGE):
             bounds.append(block.bounding_box)
 
-    ocr_text = ''.join([symbol for symbol in full_text])
+    ocr_text = ' '.join([symbol for symbol in words])
     return (ocr_text, bounds)
 
 
 def process_response(imgFile, ocr_response):
+    print("Processing ocr response")
     image = Image.open(imgFile)
+    (text, bounds) = get_document_bounds(ocr_response, FeatureType.PARA)
+    draw_boxes(image, bounds, 'yellow')
     (text, bounds) = get_document_bounds(ocr_response, FeatureType.WORD)
+    draw_boxes(image, bounds, 'blue')
     with open(imgFile + ".ocr.txt", "w") as text_file:
         text_file.write(text)
-    draw_boxes(image, bounds, 'blue')
     image.save(imgFile + ".bounds.jpg")
-    image.show()
 
 
 def ocr_image(client, imgFile):
