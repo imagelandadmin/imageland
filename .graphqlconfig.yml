@@ -1,0 +1,13 @@
+imageland:
+  schemaPath: amplify/backend/api/imageland/schema.json
+  includes:
+    - backend/api/imageland/build/schema.graphql
+  excludes:
+    - amplify/**
+  extensions:
+    amplify:
+      graphQLApiId: 37hkilsd6jfxpc3kakfs5ctfre
+      codeGenTarget: typescript
+      generatedFileName: src/app/models/API.ts
+    endPoints: >-
+      https://tfz7s43vgnfi5ouqbitmlht7uq.appsync-api.us-east-1.amazonaws.com/graphql
