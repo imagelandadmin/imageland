@@ -8,8 +8,7 @@ from PIL import Image, ImageDraw
 from enum import Enum
 import argparse
 
-# Note: you need the aws CLI installed with configured credentials
-# You also must install the python google vision client and pillow lib
+# You must install the python google vision client and pillow lib
 # pip install --upgrade google-cloud-vision
 # pip install --upgrade Pillow
 
